@@ -251,7 +251,7 @@
 \subsubsection{处理}
 	\begin{enumerate}
 		\item 检测输入有效性，检测请求来源和格式是否符合标准;
-		\item 生成界面元素，详见\ref{ssec:ui}；
+		\item 生成主页界面;
 		\item 返回完成的信息;
 	\end{enumerate}
 \subsubsection{输出}
@@ -281,7 +281,7 @@
 		\item 检测登陆凭据，若校验失败或登录超时，抛出相应异常;
 		\item 检查歌单ID是否存在，若不存在，抛出相应异常;
 		\item 检查歌单的可访问性，若为非公开的，则检查登录凭证对应的用户是否有读取权限，若否，抛出相应异常;
-		\item 生成歌单界面元素，详见\ref{ssec:ui}；
+		\item 生成歌单界面;
 		\item 返回完成的信息;
 	\end{enumerate}
 	\noindent 异常处理：
@@ -319,7 +319,6 @@
 		\item 检查歌曲的可访问性，若为付费的音乐，检查用户凭证对应的账户是否对其有播放权，
 			若否或没有登录，返回错误信息;
 		\item 若具有播放权，生成完整播放界面;
-		\item 具体界面要求详见\ref{ssec:ui}；
 		\item 返回完成的信息;
 	\end{enumerate}
 	\noindent 异常处理：
@@ -354,9 +353,9 @@
 		\item 检测输入有效性，检测请求来源和格式是否符合标准；
 		\item 检测登陆凭据，若校验失败或登录超时，抛出相应异常;
 		\item 检测是否登录，若登录，则从服务器获取个性化推荐信息
-		(详见R.CLOUDMUSIC.RECOMMEND.001);
+			\\(详见R.CLOUDMUSIC.RECOMMEND.001);
 		\item 从服务器获取音乐排名信息(详见R.CLOUDMUSIC.RECOMMEND.002);
-		\item 生成音乐推荐界面, 详见\ref{ssec:ui}；
+		\item 生成音乐推荐界面;
 		\item 返回完成的信息;
 	\end{enumerate}
 	\noindent 异常处理: 
@@ -391,7 +390,7 @@
 		\item 若没有登陆，生成登陆界面;
 		\item 检测登陆凭据，若校验失败或登录超时，抛出相应异常;
 		\item 向服务器请求用户的数据；
-		\item 生成用户的界面信息，详见\ref{ssec:ui}；
+		\item 生成用户的界面信息;
 		\item 返回完成的信息；
 	\end{enumerate}
 	\noindent 异常处理: 
@@ -422,7 +421,7 @@
 	\begin{enumerate}
 		\item 检测输入有效性，检测请求来源和格式是否符合标准；
 		\item 读取当前的用户设置信息；
-		\item 生成设置界面，详见\ref{ssec:ui}；
+		\item 生成设置界面；
 		\item 返回完成的信息；
 	\end{enumerate}
 \subsubsection{输出}
@@ -1090,7 +1089,7 @@
 
 后端服务可以运行在任何32位或64位X86架构的服务器上，要求服务器有互联网接入，32GB以上的磁盘存储空间。
 
-客户端软件要求运行在有互联网接入，有声卡的任何iOS移动设备，Android移动设备，MacOS、Windows、Linux个人计算机设备上。
+客户端软件要求运行在有互联网接入，有声卡的任何iOS移动设备，Android移动设备，macOS、Windows、Linux个人计算机设备上。
 
 
 \subsection{通讯接口}
