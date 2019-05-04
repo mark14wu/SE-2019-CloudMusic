@@ -1,4 +1,61 @@
 \chapter{依赖关系}
-<Explain the internal and external dependency for each requirement (if applicable). >
 
-解释每一条需求的内部和外部依赖关系。
+\section{说明}
+
+    表中的主体和依赖均省略了前缀 R.CLOUDMUSIC ，\\
+    如 SYS.001 代表 R.CLOUDMUSIC.SYS.001 。
+
+\section{内部依赖}
+\begin{table}[h]
+    \caption {内部依赖关系表}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        主体 & 依赖 & 说明\\
+        \hline
+        SYS.001 & SYS.003 & 应用启动时需要检查更新\\
+        \hline
+        SYS.001 & APP.001 & 应用启动时需要显示主界面\\
+        \hline
+        SYS.001 & USER.001 & 应用启动时需要自动登陆\\
+        \hline
+        SYS.002 & MUSIC.003 & 应用关闭时需检测下载状态和暂停下载\\
+        \hline
+        SYS.003 & MUSIC.003 & 应用更新时需要检测下载状态和暂停下载\\
+        \hline
+        SYNC.001 & USER.001 & 上传数据需要用户先登陆\\
+        \hline
+        SYNC.002 & SYNC.001 & 需要上传数据后才能下载\\
+        \hline
+    \end{tabular}
+\end{table}
+
+\section{外部依赖}
+\begin{table}[h]
+    \caption {外部依赖关系表}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        主体 & 依赖 & 说明\\
+        \hline
+        USER.001 & DB.001 & 用户登陆需要访问用户数据库\\
+        \hline
+        USER.002 & DB.001 & 用户注册需要访问用户数据库\\
+        & & 以进行用户名查重以及用户的添加\\
+        \hline
+        USER.003 & DB.001 & 用户的注销需要访问用户数据库\\
+        \hline
+        APP.003 & DB.002 & 需要访问数据库以确定用户是否有歌曲的访问权\\
+        \hline
+        APP.005 & DB.001 & 需要访问用户数据库以生成用户页面\\
+        \hline
+        SHOP.001 & DB.002 & 购买音乐需要访问用户数据库以更改权限\\
+        \hline
+        COMMUNITY001 & DB.001 & 评价需要访问数据库\\
+        \hline
+        COMMUNITY002 & DB.001 & 分享需要访问数据库\\
+        \hline
+        RECOMMEND001 & DB.001 & 获取个性化推荐需要访问数据库\\
+        \hline
+        RECOMMEND002 & DB.001 & 获取排行榜需要访问数据库\\
+        \hline
+    \end{tabular}
+\end{table}

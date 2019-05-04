@@ -43,6 +43,7 @@
 	\item \textbf{有效输出范围}：响应的标准格式(如 HTTP 报文);
 	\item \textbf{错误消息}：返回在异常处理中生成的错误信息;
 \end{itemize}
+\end{enumerate}
 
 \subsection{R.CLOUDMUSIC.SYS.002客户端关闭}
 \subsubsection{介绍}
@@ -351,7 +352,8 @@
 	\begin{enumerate}
 		\item 检测输入有效性，检测请求来源和格式是否符合标准；
 		\item 检测登陆凭据，若校验失败或登录超时，抛出相应异常;
-    \item 检测是否登录，若登录，则从服务器获取个性化推荐信息(R.CLOUDMUSIC.RECOMMEND.001)
+    \item 检测是否登录，若登录，则从服务器获取个性化推荐信息(R.CLOUDMUSIC.
+    RECOMMEND.001)
 		\item 从服务器获取音乐排名信息(R.CLOUDMUSIC.RECOMMEND.002)
 		\item 生成音乐推荐界面, 详见\ref{ssec:ui}；
 		\item 返回完成的信息;
@@ -405,7 +407,7 @@
 	\item \textbf{错误消息}: 返回错误信息，告知用户尝试进入账户界面失败的原因，
 		并按照情况处理；
 \end{itemize}
-
+\iffalse
 \R {
 \subsection{R.CLOUDMUSIC.APP.006生成私人空间界面}
 \subsubsection{介绍}
@@ -449,8 +451,8 @@
 		并按照情况处理；
 \end{itemize}
 }
- 
-\subsection{\R{R.CLOUDMUSIC.APP.007生成设置界面}}
+\fi 
+\subsection{R.CLOUDMUSIC.APP.007生成设置界面}
 \subsubsection{介绍}
 	这是在 生成设置界面 时，我们需要处理的功能点，包括: 
 	\begin{itemize}
@@ -476,11 +478,12 @@
 	\item \textbf{有效输出范围}: 无限制（根据服务端的程序逻辑，不会产生非法响应）；
 	\item \textbf{错误消息}: 理论上，该界面不应该发生错误，若有，则应当视为程序BUG；
 \end{itemize}
+\iffalse
 \R{
 \subsubsection{备注}
 该小节，需求编号由原R.CLOUDMUSIC.APP.006更改为R.CLOUDMUSIC.APP.007。
 	}
-
+\fi
 \subsection{R.CLOUDMUSIC.MUSIC.001音乐播放控制}
 \subsubsection{介绍}
 	这是在 处于音乐播放的状态下 时，我们需要处理的功能点，包括: 
@@ -671,7 +674,7 @@
 	\item \textbf{错误消息}: 按照系统响应请求的方式或者网络服务发出响应报文的
 		正确格式决定相关输出；
 \end{itemize}
-
+\iffalse
 \R{
 \subsection{R.CLOUDMUSIC.SHOP.002购买会员}
 \subsubsection{介绍}
@@ -723,6 +726,50 @@
 		正确格式决定相关输出；
 \end{itemize}
 }
+\fi
+\subsection{R.CLOUDMUSIC.SYNC.001数据同步上传}
+\subsubsection{介绍}
+	这是在 处理数据同步上传请求 时，我们需要处理的功能点，包括: 
+	\begin{itemize}
+		\item 连接服务器，验证账户登陆凭据；
+		\item 上传数据至服务器；
+	\end{itemize}
+\subsubsection{输入}
+	\begin{itemize}
+		\item \textbf{输入来源}: 客户端或网页浏览器；
+		\item \textbf{内容}: 对数据同步上传请求，包括: 
+		\begin{enumerate}
+			\item 用户登陆凭据；
+			\item 当前时间；
+			\item 变更的摘要；
+		\end{enumerate}
+		\item \textbf{有效输入范围}: 需要判断请求的合法性，具体如下: 
+		\begin{itemize}
+			\item 对于用户登陆凭据，需对其校验； 
+			\item 对于时间，需验证是否为更新的数据； 
+		\end{itemize}
+	\end{itemize}
+\subsubsection{处理}
+	\begin{enumerate}
+		\item 检测输入有效性，检测请求来源和格式是否符合标准；
+		\item 若有用户登陆凭据，验证其合法性；
+		\item 检查服务器中的数据库，检查是否有更新的数据；
+		\item 根据数据变更的摘要，对服务器端做数据接收的准备；
+		\item 建立服务器信道，返回响应，进行用户数据的上传；
+	\end{enumerate}
+	\noindent 异常处理: 
+	\begin{enumerate}
+		\item \textbf{登录信息失败}: 返回登陆失败错误的信息，客户端将请求用户重登陆；
+		\item \textbf{网络访问}: 返回网络错误的信息，客户端提示用户检查网络状态；
+	\end{enumerate}
+\subsubsection{输出}
+\begin{itemize}
+	\item \textbf{输出位置}: 客户端或网页浏览器；
+	\item \textbf{内容}: 若成功，返回对应的成功响应 ，若失败，返回失败的原因；
+	\item \textbf{有效输出范围}: 无限制（根据服务端的程序逻辑，不会产生非法响应）；
+	\item \textbf{错误消息}: 按照系统响应请求的方式或者网络服务发出响应报文的
+		正确格式决定相关输出；
+\end{itemize}
 
 \subsection{R.CLOUDMUSIC.SYNC.001数据同步上传}
 \subsubsection{介绍}
@@ -811,6 +858,157 @@
 		正确格式决定相关输出；
 \end{itemize}
 
+
+\subsection{R.CLOUDMUSIC.COMMUNITY.001分享}
+\subsubsection{介绍}
+	这是在 处理分享请求 时，我们需要处理的功能点，包括：
+	\begin{itemize}
+		\item 连接服务器，验证账户信息、推荐内容信息；
+		\item 生成推荐链接；
+	\end{itemize}
+\subsubsection{输入}
+	\begin{itemize}
+		\item \textbf{输入来源}：客户端或网页浏览器；
+		\item \textbf{内容}：对分享链接生成的请求，包括：
+		\begin{enumerate}
+			\item 用户信息（可选）；
+			\item 推荐内容；
+			\item 用户附加推荐信息；
+		\end{enumerate}
+		\item \textbf{有效输入范围}：需要判断请求的合法性，具体如下：
+		\begin{itemize}
+			\item 若有用户登陆凭据，需对其校验； 
+		\end{itemize}
+	\end{itemize}
+\subsubsection{处理}
+	\begin{enumerate}
+		\item 检测输入有效性，检测请求来源和格式是否符合标准；
+		\item 若有用户登陆凭据，验证其合法性；
+		\item 检查推荐内容；
+		\item 检查附加推荐信息；
+		\item 生成对应推荐链接；
+	\end{enumerate}
+\subsubsection{输出}
+\begin{itemize}
+	\item \textbf{输出位置}：客户端或网页浏览器；
+	\item \textbf{内容}：若成功，返回对应的生成链接响应 ，若失败，返回失败的原因；
+	\item \textbf{有效输出范围}：无限制（根据服务端的程序逻辑，不会产生非法响应）；
+	\item \textbf{错误消息}：按照系统响应请求的方式或者网络服务发出响应报文的
+		正确格式决定相关输出；
+\end{itemize}
+
+\subsection{R.CLOUDMUSIC.COMMUNITY.002评价}
+\subsubsection{介绍}
+	这是在 处理评价请求 时，我们需要处理的功能点，包括：
+	\begin{itemize}
+		\item 连接服务器，验证账户信息；
+		\item 从服务器更新评价信息；
+		\item 若有上传评价请求，上传评价内容到服务器；
+		\item 服务器处理评价内容；
+	\end{itemize}
+\subsubsection{输入}
+	\begin{itemize}
+		\item \textbf{输入来源}：客户端或网页浏览器；
+		\item \textbf{内容}：对评价请求，包括：
+		\begin{enumerate}
+			\item 用户登陆信息；
+			\item 评价内容（可选）；
+		\end{enumerate}
+		\item \textbf{有效输入范围}：需要判断请求的合法性，具体如下：
+		\begin{itemize}
+			\item 对于用户信息，需对其校验； 
+			\item 若有上传评价信息，检查评价内容； 
+		\end{itemize}
+	\end{itemize}
+\subsubsection{处理}
+	\begin{enumerate}
+		\item 检测输入有效性，检测请求来源和格式是否符合标准；
+		\item 检验用户信息，是否为登录状态；
+		\item 若有评价信息上传，检查评价内容，检查是否需要过滤；
+		\item 服务器记录评价上传时间；
+		\item 若所有检查通过，将评价进行处理插入数据库；		\item 从数据库中查找相应评价数据返回给客户端；
+	\end{enumerate}
+\subsubsection{输出}
+\begin{itemize}
+	\item \textbf{输出位置}：客户端或网页浏览器；
+	\item \textbf{内容}：若成功，返回对应的成功响应 ，若失败，返回失败的原因；
+	\item \textbf{有效输出范围}：无限制（根据服务端的程序逻辑，不会产生非法响应）；
+	\item \textbf{错误消息}：按照系统响应请求的方式或者网络服务发出响应报文的
+		正确格式决定相关输出；
+\end{itemize}
+
+\subsection{R.CLOUDMUSIC.RECOMMEND.001个性化推荐}
+\subsubsection{介绍}
+	这是在 处理个性化推荐请求 时，我们需要处理的功能点，包括：
+	\begin{itemize}
+		\item 连接服务器，验证账户信息；
+		\item 从服务器下载数据；
+	\end{itemize}
+\subsubsection{输入}
+	\begin{itemize}
+		\item \textbf{输入来源}：客户端或网页浏览器；
+		\item \textbf{内容}：对数据同步上传请求，包括：
+		\begin{enumerate}
+			\item 用户信息；
+		\end{enumerate}
+		\item \textbf{有效输入范围}：需要判断请求的合法性，具体如下：
+		\begin{itemize}
+			\item 对于用户信息，需对其校验； 
+		\end{itemize}
+	\end{itemize}
+\subsubsection{处理}
+	\begin{enumerate}
+		\item 检测输入有效性，检测请求来源和格式是否符合标准；
+		\item 若有用户登陆凭据，验证其合法性，若无按默认推荐处理；
+		\item 从服务器中的数据库中查找对应数据；
+		\item 返回查找到的数据；
+	\end{enumerate}
+\subsubsection{输出}
+\begin{itemize}
+	\item \textbf{输出位置}：客户端或网页浏览器；
+	\item \textbf{内容}：若成功，返回对应的成功响应 ，若失败，返回失败的原因；
+	\item \textbf{有效输出范围}：无限制（根据服务端的程序逻辑，不会产生非法响应）；
+	\item \textbf{错误消息}：按照系统响应请求的方式或者网络服务发出响应报文的
+		正确格式决定相关输出；
+\end{itemize}
+
+\subsection{R.CLOUDMUSIC.RECOMMEND.002排行榜}
+\subsubsection{介绍}
+	这是在 处理排行榜请求 时，我们需要处理的功能点，包括：
+	\begin{itemize}
+		\item 连接服务器，验证账户登陆凭据；
+		\item 从服务器更新排行榜数据；
+	\end{itemize}
+\subsubsection{输入}
+	\begin{itemize}
+		\item \textbf{输入来源}：客户端或网页浏览器；
+		\item \textbf{内容}：对数据同步上传请求，包括：
+		\begin{enumerate}
+			\item 用户登陆凭据（可选）；
+			\item 本地排行榜数据；
+		\end{enumerate}
+		\item \textbf{有效输入范围}：需要判断请求的合法性，具体如下：
+		\begin{itemize}
+			\item 对于用户登陆凭据，需对其校验； 
+			\item 对于本地排行榜数据，需验证是否为需要更新的数据； 
+		\end{itemize}
+	\end{itemize}
+\subsubsection{处理}
+	\begin{enumerate}
+		\item 检测输入有效性，检测请求来源和格式是否符合标准；
+		\item 若有用户登陆凭据，验证其合法性；
+		\item 检查服务器中的数据库，检查排行榜是否需要更新；
+		\item 若需要更新，则返回给客户端最新的排行榜数据，否则告诉客户端无需更新；
+	\end{enumerate}
+\subsubsection{输出}
+\begin{itemize}
+	\item \textbf{输出位置}：客户端或网页浏览器；
+	\item \textbf{内容}：若成功，返回对应的成功响应 ，若失败，返回失败的原因；
+	\item \textbf{有效输出范围}：无限制（根据服务端的程序逻辑，不会产生非法响应）；
+	\item \textbf{错误消息}：按照系统响应请求的方式或者网络服务发出响应报文的
+		正确格式决定相关输出；
+\end{itemize}
+
 \section{性能需求}
 
 \subsection{服务器响应需求}
@@ -862,43 +1060,8 @@
 		对于一般的用户，我们的产品使用逻辑与一般的PC软件一致，
 			用户不需要主动学习便可学会使用它，
 		同时，我们也会在安装后附上使用说明书，来保证用户可以方便使用；
-	\item \textbf{页面规划}:  
-	\begin{itemize}
-		\item 主页界面的用户接口设计，请参考图\ref{fig:desttop_home}；
-		\item 音乐播放界面的用户接口设计，请参考图\ref{fig:desttop_music}；
-		\item 歌单查看界面的用户接口设计，请参考图\ref{fig:desttop_collection}；
-	\end{itemize}
 \end{enumerate}
 
-\begin{figure}[h!]
-  \centering
-
-  \includegraphics[width=.95\linewidth]{figures/desttop_home}
-
-  \caption{  \label{fig:desttop_home}
-  		PC客户端主页（Home Page）用户接口设计图
-    }
-\end{figure}
-
-\begin{figure}[h!]
-  \centering
- 
-  \includegraphics[width=.95\linewidth]{figures/desttop_music}
-
-  \caption{ \label{fig:desttop_music}
-  		PC客户端音乐播放界面用户接口设计图
-    }
-\end{figure}
-
-\begin{figure}[h!]
-  \centering
-
-  \includegraphics[width=.95\linewidth]{figures/desttop_collection}
-
-  \caption{  \label{fig:desttop_collection}
-  		PC客户端歌单展示用户接口设计图
-    }
-\end{figure}
 
 
 \subsubsection{移动客户端用户接口} % (fold)
@@ -911,45 +1074,9 @@
 		对于一般的用户，我们的产品使用逻辑与一般的移动设备软件一致，
 			用户不需要主动学习便可学会使用它，
 		同时，我们也会在安装后附上使用说明书，来保证用户可以方便使用；
-	\item \textbf{页面规划}:  
-	\begin{itemize}
-		\item 主页界面的用户接口设计，请参考图\ref{fig:mobile_home}；
-		\item 音乐播放界面的用户接口设计，请参考图\ref{fig:mobile_music}；
-		\item \R{K歌界面的用户接口设计，请参考图\ref{fig:mobile_K}}；
-		\item 歌单查看界面的用户接口设计，请参考图\ref{fig:mobile_collection}；
-	\end{itemize}
 \end{enumerate}
 
-\begin{figure}[h!]
-  \centering
-
-  \includegraphics[width=.33\linewidth]{figures/mobile_home}
-
-  \caption{  \label{fig:mobile_home}
-  		移动客户端主页（Home Page）用户接口设计图
-    }
-\end{figure}
-
-\begin{figure}[h!]
-  \centering
- 
-  \includegraphics[width=.33\linewidth]{figures/mobile_music}
-
-  \caption{ \label{fig:mobile_music}
-  		移动客户端音乐播放界面用户接口设计图
-    }
-\end{figure}
-
-\begin{figure}[h!]
-  \centering
-
-  \includegraphics[width=.33\linewidth]{figures/mobile_collection}
-
-  \caption{  \label{fig:mobile_collection}
-  		移动客户端歌单展示用户接口设计图
-    }
-\end{figure}
-
+\iffalse
 \R{
 \subsubsection{社交需求界面用户接口} % (fold)
 	\begin{enumerate}
@@ -958,7 +1085,7 @@
 		首先是``他/她的歌单''，显示该用户创建的歌单，并可以进行点赞操作。
 		然后是``他/她的动态''，可以展示该用户发出的动态，并可以进行评论和点赞。
 		以上点赞和评论的数量会被显示。
-	\item \textbf{页面规划}:  
+	\item \textbf{页面规划}： 
 	\begin{itemize}
 		\item 私人空间-歌单界面设计，请参考图\ref{fig:mobile_user1}；
 		\item 私人空间-动态界面设计，请参考图\ref{fig:mobile_user2}；
@@ -993,6 +1120,7 @@
   		\R{移动客户端K歌模式下音乐界面用户接口设计图}
     }
 \end{figure}
+\fi
 
 \subsubsection{网页客户端用户接口} % (fold)
 
@@ -1004,140 +1132,67 @@
 		对于一般的用户，我们的产品使用逻辑与一般的网页一致，
 			用户不需要主动学习便可学会使用它，
 		同时，我们也会在安装后附上使用说明书，来保证用户可以方便使用；
-	\item \textbf{页面规划}:  
-	\begin{itemize}
-		\item 主页界面的用户接口设计，请参考图\ref{fig:web_home}；
-		\item 音乐播放界面的用户接口设计，请参考图\ref{fig:web_music}；
-		\item 歌单查看界面的用户接口设计，请参考图\ref{fig:web_collection}；
-	\end{itemize}
 \end{enumerate}
-
-\begin{figure}[h!]
-  \centering
-
-  \includegraphics[width=.95\linewidth]{figures/web_home}
-
-  \caption{  \label{fig:web_home}
-  		网页客户端主页（Home Page）用户接口设计图
-    }
-\end{figure}
-
-\begin{figure}[h!]
-  \centering
- 
-  \includegraphics[width=.95\linewidth]{figures/web_music}
-
-  \caption{ \label{fig:web_music}
-  		网页客户端音乐播放界面用户接口设计图
-    }
-\end{figure}
-
-\begin{figure}[h!]
-  \centering
-
-  \includegraphics[width=.95\linewidth]{figures/web_collection}
-
-  \caption{  \label{fig:web_collection}
-  		网页客户端歌单展示用户接口设计图
-    }
-\end{figure}
 
 \subsection{软件接口}
 
-\subsubsection{数据库软件产品可选项A} % (fold)
+\subsubsection{数据库软件产品} % (fold)
 \begin{itemize}
-	\item \textbf{名字}: 
+	\item \textbf{名字}：
 		Oracle Database 数据库软件
-	\item \textbf{助记符}: 
+	\item \textbf{助记符}：
 		Oracle Database
-	\item \textbf{版本号}: 
+	\item \textbf{版本号}：
 		12c Release 1
-	\item \textbf{来源}: 
+	\item \textbf{来源}：
 		软件商提供的安装介质
-	\item \textbf{目的}: 
-		作为储存服务器数据的可选项之一，我们将根据实际情况，
-			最终决定是否使用它，另一选项是PostgreSQL数据库软件。
-	\item \textbf{接口定义}: 
-		包含以下接口: 
+	\item \textbf{目的}：
+		作为储存服务器数据的数据库
+	\item \textbf{接口定义}：
+		包含以下接口：
 		\begin{enumerate}
-			\item 查询用户 ， ViewUser   ， 接口格式: $\{ UID \}$
-			\item 校验用户 ， CheckUser  ， 接口格式: $\{ UID, LoginInfo \}$
-			\item 注册用户 ， RegisterUser  ， 接口格式: $\{ UID,  PassWord, Email\}$
-			\item 查询音乐 ， ViewMusic  ， 接口格式: $\{ MID \}$
-			\item 检验音乐可访问性 ， AccessMusic ，接口格式:  $\{ MID, UID, LoginInfo \}$ 
+			\item 查询用户 ， ViewUser   ， 接口格式：$\{ UID \}$
+			\item 校验用户 ， CheckUser  ， 接口格式：$\{ UID, LoginInfo \}$
+			\item 注册用户 ， RegisterUser  ， 接口格式：$\{ UID,  PassWord,\}$
+			\item 查询音乐 ， ViewMusic  ， 接口格式：$\{ MID \}$
+			\item 检验音乐可访问性 ， AccessMusic ，接口格式： $\{ MID, UID, LoginInfo \}$
+			\item 增加音乐 ， AddMusic  ， 接口格式：$\{ MID，File \}$
+			\item 查询评论 ， ViewComment ，接口格式： $\{MID \}$
+			\item 增加评论, AddComment, 接口格式：$\{MID，Content \}$
 		\end{enumerate}
 \end{itemize}
 
-\subsubsection{数据库软件产品可选项B} % (fold)
-\begin{itemize}
-	\item \textbf{名字}: 
-		PostgreSQL Server
-	\item \textbf{助记符}: 
-		PostgreSQL
-	\item \textbf{版本号}: 
-		10.3
-	\item \textbf{来源}: 
-		包管理器
-	\item \textbf{目的}: 
-		作为储存服务器数据的可选项之一，我们将根据实际情况，
-			最终决定是否使用它，另一选项是Oracle Database数据库软件。
-	\item \textbf{接口定义}: 
-		包含以下接口: 
-		\begin{enumerate}
-			\item 查询用户 ， ViewUser   ， 接口格式: $\{ UID \}$
-			\item 校验用户 ， CheckUser  ， 接口格式: $\{ UID, LoginInfo \}$
-			\item 注册用户 ， RegisterUser  ， 接口格式: $\{ UID,  PassWord, Email\}$
-			\item 查询音乐 ， ViewMusic  ， 接口格式: $\{ MID \}$
-			\item 检验音乐可访问性 ， AccessMusic ，接口格式:  $\{ MID, UID, LoginInfo \}$ 
-		\end{enumerate}
-\end{itemize}
 
 \subsubsection{HTTP服务器} % (fold)
 \begin{itemize}
-	\item \textbf{名字}: 
+	\item \textbf{名字}：
 	Nginx
-	\item \textbf{助记符}: 
+	\item \textbf{助记符}：
 	Nginx
-	\item \textbf{版本号}: 
+	\item \textbf{版本号}：
 	1.14.0
-	\item \textbf{来源}: 
+	\item \textbf{来源}：
 	包管理器
-	\item \textbf{目的}: 
+	\item \textbf{目的}：
 	提供文件下载和动态网页的换发
-	\item \textbf{接口定义}: 
+	\item \textbf{接口定义}：
 	使用nginx的配置文件来定义结构并过滤包，使用80和443端口对公网提供服务
 \end{itemize}
 
 \subsubsection{后端框架} % (fold)
 \begin{itemize}
-	\item \textbf{名字}: 
+	\item \textbf{名字}：
 	Django
-	\item \textbf{助记符}: 
+	\item \textbf{助记符}：
 	Django
-	\item \textbf{版本号}: 
+	\item \textbf{版本号}：
 	2.0.4
-	\item \textbf{来源}: 
+	\item \textbf{来源}：
 	包管理器
-	\item \textbf{目的}: 
+	\item \textbf{目的}：
 	提供RESTful API，运行实际服务
-	\item \textbf{接口定义}: 
+	\item \textbf{接口定义}：
 	使用HTTP协议，监听从Nginx转发来的请求
-\end{itemize}
-
-\subsubsection{音频解码}
-\begin{itemize}
-	\item \textbf{名字}: 
-	mpg123
-	\item \textbf{助记符}: 
-	mpg123
-	\item \textbf{版本号}: 
-	1.25.10
-	\item \textbf{来源}: 
-	mpg123官网: http://mpg123.org/
-	\item \textbf{目的}: 
-	解码mp3
-	\item \textbf{接口定义}: 
-	使用mpg123接口进行音频解码和输出
 \end{itemize}
 
 \subsection{硬件接口}
@@ -1151,7 +1206,7 @@
 
 使用HTTP1.0/HTTP1.1/HTTPS协议在前端和后端之间进行交互。API使用了RESTful API，利用JSON进行数据交换。
 
-JSON所支持的数据类型如下: 
+JSON所支持的数据类型如下：
 \begin{itemize}
 	\item \textbf{String}: 字符串
 	\item \textbf{Number}: 整数或浮点数
@@ -1166,34 +1221,26 @@ JSON所支持的数据类型如下:
 	\item ?可选
 \end{itemize}
 
-定义扩展数据类型有: 
+定义扩展数据类型有：
 \begin{itemize}
-	\item \textbf{DateTime}: ISO-8601字符串，零时区。如 “2017-07-17T07:12:29.181605Z”
+	\item \textbf{DateTime}: ISO-8601字符串，零时区。
 	\item \textbf{URL}: 统一资源链接，即字符串
 	\item \textbf{Email}: 邮箱名，即字符串
 	\item \textbf{Phone}: 电话号码，即字符串
 	\item \textbf{User}: 用户信息
 \begin{lstlisting}[numbers=none, frame=none]
 {
-    id!: Number,
-    last_login!: DateTime | null,
+    uid!: Number,
     username!: String,
-    phone_number: Phone,
-    email: Email,
     description: String,
-    avatar_url!: URL,
-    address: String,
-    description: String
 }
 \end{lstlisting}
 	\item \textbf{Notice}: 通知
 \begin{lstlisting}[numbers=none, frame=none]
 {
-    id!: Number,
-    category!: String,
-  	message!: String,
+  	message: String,
   	has_read: Boolean,
-  	created!: DateTime
+  	time: DateTime
 }
 \end{lstlisting}
 	\item \textbf{File}: 文件
@@ -1204,7 +1251,7 @@ JSON所支持的数据类型如下:
     mime_type: String
 }
 \end{lstlisting}
-\item \textbf{MusicQuality}: 音乐质量，可能有四个值:'128kbps'、'192kbps'、'320kbps'
+\item \textbf{MusicQuality}: 音乐质量，可能有三个值:'128kbps'、'192kbps'、'320kbps'
 \item \textbf{MusicInfo}: 音乐信息
 \begin{lstlisting}[numbers=none, frame=none]
 {
@@ -1228,7 +1275,7 @@ JSON所支持的数据类型如下:
 \subsubsection{POST /api/users/username\_login/}
 
 \noindent
-功能: 用户使用用户名登录\\
+功能：用户使用用户名登录\\
 请求:
 \begin{lstlisting}[numbers=none, frame=none]
 {
@@ -1238,212 +1285,147 @@ JSON所支持的数据类型如下:
 \end{lstlisting}
 返回:
 \begin{itemize}
-	\item 成功:  200 -> String = 'OK'
-	\item 失败:  403 -> String // 理由
-\end{itemize}
-
-\subsubsection{POST /api/users/phone\_login/}
-
-\noindent
-功能: 用户使用用户名登录\\
-请求:
-\begin{lstlisting}[numbers=none, frame=none]
-{
-   phone*: Phone,
-   password*: String,
-}
-\end{lstlisting}
-返回:
-\begin{itemize}
-	\item 成功:  200 -> String = 'OK'
-	\item 失败:  403 -> String // 理由
+	\item 成功： 200 -> String = 'OK'
+	\item 失败： 403 -> String // 理由
 \end{itemize}
 
 \subsubsection{GET /api/users/logout/}
 
 \noindent
-功能: 登出\\
+功能：登出\\
 返回:
 \begin{itemize}
-	\item 成功:  200 -> String = 'OK'
-	\item 失败:  403 -> String // 理由
+	\item 成功： 200 -> String = 'OK'
+	\item 失败： 403 -> String // 理由
 \end{itemize}
 
 
 \subsubsection{GET /api/users/:id/}
 
 \noindent
-功能: 获得:id所指示用户的信息\\
+功能：获得:id所指示用户的信息\\
 返回:
 \begin{itemize}
-	\item 成功:  200 -> User
-	\item 未登录:  403 -> String = 'not logged'
-	\item 不存在:  404
+	\item 成功： 200 -> User
+	\item 未登录： 403 -> String = 'not logged'
+	\item 不存在： 404
 \end{itemize}
-
-
-
-\subsubsection{POST /api/users/upload\_avatar/}
-
-\noindent
-功能: 上传头像\\
-请求: 
-\begin{lstlisting}[numbers=none, frame=none]
-{
-    file*: File
-}
-\end{lstlisting}
-返回:
-\begin{itemize}
-	\item 成功:  200 -> String :头像的URL
-	\item 未登录:  403 -> String = 'not logged'
-	\item 无文件: 400
-\end{itemize}
-
 
 \subsubsection{POST /api/users/change\_password/}
 
 \noindent
-功能: 更改密码\\
-请求: 
+功能：更改密码\\
+请求：
 \begin{lstlisting}[numbers=none, frame=none]
 {
     old_pwd*: String,
     new_pwd1*: String,
-    new_pwd2*: String
 }
 \end{lstlisting}
 返回:
 \begin{itemize}
-	\item 成功:  200 -> String = 'OK'
-	\item 未登录:  403 -> String = 'not logged'
-\end{itemize}
-
-\subsubsection{GET /api/users/reset\_password\_mail/}
-
-\noindent
-功能: 向邮件发送重置链接用于重置密码\\
-返回:
-\begin{itemize}
-	\item 成功:  200 -> String = 'OK'
-	\item 请求过于频繁:  429
-	\item 邮件发送失败:  500
+	\item 成功： 200 -> String = 'OK'
+	\item 未登录： 403 -> String = 'not logged'
 \end{itemize}
 
 
-\subsubsection{GET /api/users/reset\_password\_phone/}
+\subsubsection{GET /api/users/get\_info/}
 
 \noindent
-功能: 向手机发送验证号码用于重置密码\\
-参数: phone\_number: String\\
+功能：获得当前登录用户的信息\\
+参数：无\\
 返回:
 \begin{itemize}
-\item 成功:  200 -> String = 'OK'
-\item 请求过于频繁:  429
-\item 短信发送失败:  500
-\end{itemize}
-
-
-
-\subsubsection{GET /api/users/me/}
-
-\noindent
-功能: 获得当前登录用户的信息\\
-参数: 无\\
-返回:
-\begin{itemize}
-	\item 成功:  200 -> User
-	\item 未登录:  403 -> String = 'not logged'
+	\item 成功： 200 -> User
+	\item 未登录： 403 -> String = 'not logged'
 \end{itemize}
 
 
 \subsubsection{GET /api/search/music/:name}
 
 \noindent
-功能: 对音乐名字进行搜索\\
-参数: 无\\
+功能：对音乐名字进行搜索\\
+参数：无\\
 返回:
 \begin{itemize}
-	\item 成功:  200 -> List<MusicInfo>
-	\item 未登录:  403 -> String = 'not logged'
+	\item 成功： 200 -> List<MusicInfo>
+	\item 未登录： 403 -> String = 'not logged'
 \end{itemize}
 
+\iffalse
 \R{
 	\subsubsection{GET /api/music\_recommend/}
 	\noindent
-	功能: 获得音乐文件信息\\
+	功能：获得音乐文件信息\\
 	参数: 无\\
 	返回:
 	\begin{itemize}
-		\item 成功:  200 -> MusicFileInfo
-		\item 未登录:  403 -> String = 'not logged in'
+		\item 成功： 200 -> MusicFileInfo
+		\item 未登录： 403 -> String = 'not logged in'
 	\end{itemize}
 }
+\fi
 
 \subsubsection{GET /api/music/}
 
 \noindent
-功能: 获得音乐文件信息\\
+功能：获得音乐文件信息\\
 查询参数: qulity: MusicQuality, music\_id: String
 返回:
 \begin{itemize}
-	\item 成功:  200 -> MusicFileInfo
-	\item 未付费:  403 -> String = 'Need to buy'
-	\item 未登录:  403 -> String = 'not logged'
+	\item 成功： 200 -> MusicFileInfo
+	\item 未登录： 403 -> String = 'not logged'
 \end{itemize}
 
 
 \subsubsection{GET /api/users/add\_to\_list/}
 
 \noindent
-功能: 将目标歌曲加入收听列表
-查询参数:  music\_id: String, list\_id: String
+功能：将目标歌曲加入收听列表
+请求参数： music\_id: String, list\_id: String
 返回:
 \begin{itemize}
-	\item 成功:  200 -> String = 'OK'
-	\item 未付费:  403 -> String = 'Need to buy'
-	\item 未登录:  403 -> String = 'not logged'
+	\item 成功： 200 -> String = 'OK'
+	\item 未登录： 403 -> String = 'not logged'
 \end{itemize}
 
 
 \subsubsection{GET /api/users/delete\_from\_list/}
 
 \noindent
-功能: 将目标歌曲加入收听列表
-查询参数:  music\_id: String, list\_id: String
+功能：将目标歌曲加入收听列表
+查询参数： music\_id: String, list\_id: String
 返回:
 \begin{itemize}
-	\item 成功:  200 -> String = 'OK'
-	\item 不存在歌曲:  403 -> String = 'music not found'
-	\item 未登录:  403 -> String = 'not logged'
+	\item 成功： 200 -> String = 'OK'
+	\item 不存在歌曲： 403 -> String = 'music not found'
+	\item 未登录： 403 -> String = 'not logged'
 \end{itemize}
 
-\R{
 	\subsubsection{POST /api/music/:id/comment/}
 	\noindent
-	功能: 评论一个歌曲\\
+	功能：评论一个歌曲\\
 	参数: id: String，content: String\\
 	返回:
 	\begin{itemize}
-	\item 成功:  200 -> String = 'OK'
-	\item 不存在歌曲:  403 -> String = 'song not found'
-	\item 未登录:  403 -> String = 'not logged in'
+	\item 成功： 200 -> String = 'OK'
+	\item 未登录： 403 -> String = 'not logged in'
 	\end{itemize}
-}
 
-\R{
+
+
 	\subsubsection{POST /api/music/:id/delete\_comment/}
 	\noindent
-	功能: 删除一个评论\\
+	功能：删除一个评论\\
 	参数: id: String\\
 	返回:
 	\begin{itemize}
-	\item 成功:  200 -> String = 'OK'
-	\item 不存在评论:  403 -> String = 'comment not found'
-	\item 未登录:  403 -> String = 'not logged in'
+	\item 成功： 200 -> String = 'OK'
+	\item 不存在评论： 403 -> String = 'comment not found'
+	\item 未登录： 403 -> String = 'not logged in'
 	\end{itemize}
-}
 
+\iffalse
 \R{
 	\subsubsection{GET /api/friend/add/}
 	\noindent
@@ -1451,81 +1433,82 @@ JSON所支持的数据类型如下:
 	参数: user\_id: String\\
 	返回:
 	\begin{itemize}
-		\item 成功:  200 -> String = 'ok'
-		\item 未登录:  403 -> String = 'not logged in'
-		\item 已添加:  403 -> String = 'already friends'
+		\item 成功： 200 -> String = 'ok'
+		\item 未登录： 403 -> String = 'not logged in'
+		\item 已添加： 403 -> String = 'already friends'
 	\end{itemize}
 }
 
 \R{
 	\subsubsection{GET /api/friend/delete/}
 	\noindent
-	功能: 删除好友\\
+	功能：删除好友\\
 	参数: user\_id: String\\
 	返回:
 	\begin{itemize}
-		\item 成功:  200 -> String = 'ok'
-	\item 未登录:  403 -> String = 'not logged in'
-	\item 未添加:  403 -> String = 'not friends'
+		\item 成功： 200 -> String = 'ok'
+	\item 未登录： 403 -> String = 'not logged in'
+	\item 未添加： 403 -> String = 'not friends'
 	\end{itemize}
 }
+\fi
 
-\R{
+
 	\subsubsection{POST /api/share/self}
 	\noindent
-	功能: 发布分享\\
+	功能：发布分享\\
 	参数: content: String\\
 	返回:
 	\begin{itemize}
-		\item 成功:  200 -> String = 'ok'
-		\item 未登录:  403 -> String = 'not logged in'
+		\item 成功： 200 -> String = 'ok'
+		\item 未登录： 403 -> String = 'not logged in'
 	\end{itemize}
-}
 
-\R{
+
+
 	\subsubsection{GET /api/share/delete/}
 	\noindent
-	功能: 删除分享\\
+	功能：删除分享\\
 	参数: share\_id: String\\
 返回:
 \begin{itemize}
-	\item 成功:  200 -> String = 'ok'
-	\item 未登录:  403 -> String = 'not logged in'
+	\item 成功： 200 -> String = 'ok'
+	\item 未登录： 403 -> String = 'not logged in'
 \end{itemize}
-}
 
-\R{
+
+
 	\subsubsection{GET /api/share/thumb/}
 	\noindent
-	功能: 点赞分享\\
+	功能：点赞分享\\
 	参数: share\_id: String\\
 	返回:
 	\begin{itemize}
-		\item 成功:  200 -> String = 'ok'
-		\item 未登录:  403 -> String = 'not logged in'
+		\item 成功： 200 -> String = 'ok'
+		\item 未登录： 403 -> String = 'not logged in'
 	\end{itemize}
-}
 
-\R{
+
+
 	\subsubsection{GET /api/share/unthumb/}
 	\noindent
-	功能: 取消点赞分享\\
+	功能：取消点赞分享\\
 	参数: share\_id: String\\
 	返回:
 	\begin{itemize}
-		\item 成功:  200 -> String = 'ok'
-		\item 未登录:  403 -> String = 'not logged in'
+		\item 成功： 200 -> String = 'ok'
+		\item 未登录： 403 -> String = 'not logged in'
 	\end{itemize}
-}
 
-\R{
+
+
 	\subsubsection{POST /api/share/comment}
 	\noindent
-	功能: 发布分享的评论\\
+	功能：发布分享的评论\\
 	参数: shared\_id: String, content: String\\
 	返回:
 	\begin{itemize}
-		\item 成功:  200 -> String = 'ok'
-		\item 未登录:  403 -> String = 'not logged in'
+		\item 成功： 200 -> String = 'ok'
+		\item 未登录： 403 -> String = 'not logged in'
 	\end{itemize}
-}
+

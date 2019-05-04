@@ -1,8 +1,33 @@
 \chapter{软件质量特性}
-<Specify any additional quality characteristics for the project that will be important to either the customers or the developers. Some to consider are: adaptability, availability, correctness, flexibility, interoperability, maintainability, portability, reliability, reusability, robustness, testability, and usability. Write these to be specific, quantitative, and verifiable when possible. At the least, clarify the relative preferences for various attributes, such as ease of use over ease of learning.
 
-详细说明项目任何其他的质量特性。该特性对客户和开发者都非常重要。考虑的方面包括：适应性，可用性，正确性，灵活性，交互工作能力，可维护性，可移植性，可靠性，可重用性，鲁棒性，可测试性和可用性等。定量的详细描述这些特性，尽可能的可验证。对不同属性之间的重要性加以阐述，如：易用性比易学性更重要。
+\section {适应性}
+\proname 提供了全平台的服务。
 
-<Please use the below sub-section for each attributes separately. You can copy the section for additional attributes. >
+\section {可用性}
+\proname 提供了傻瓜式的UI界面。
 
-每一个属性单独使用一个小节描述，可根据需要进行增减，如增加可维护性小节等。
+\section {易学性}
+\proname 提供了傻瓜式的UI界面。 \proname 的客户端附有对首次使用的用户的指引。
+
+\section {正确性}
+\proname 的服务器端应对客户端的请求使用数据包校验和用户信息的比对，拒绝非法的请求。
+\proname 的客户端在做出对用户账户的获取和变动之前，应与服务器通信比对用户凭据是否有效。
+
+\section {灵活性}
+\proname 的客户端减少各个模块间的依赖，保证逻辑的简洁，并提供简单、全面的接口。使得开发和维护过程中可以根据需求的变更快速更新。
+
+\section {可维护性}
+\proname 的代码应有良好的文档和丰富的注释(占总代码的至少 30\%)，加上简洁的逻辑，使得整个服务易于维护。
+
+\section {可移植性}
+\proname 的网页客户端代码使用标准的 HTML5 和 Javascript  ；使用响应性网页设计使得在任意分辨率和任意支持 HTML5 的浏览器上都能正常显示。使用跨平台的框架（如 Qt )，并在操作系统变动时能尽可能地减小修改。
+
+\section {可测试性}
+\proname 的各个模块间应尽可能地减少外部和内部的依赖。如有依赖，应保证尽可能地使用稳定的 API ，并可以使用 mock object 实现单元测试。
+
+\section {健壮性}
+\proname 的客户端和服务器端应检测可能发生的错误并处理。服务器端保证前端和数据库的隔离。
+
+\section {可靠性}
+\proname 服务器的数据库支持高并发的访问，客户端支持在离线时的正常使用（播放已下载的歌曲），服务器分布式分布，负载均衡，并定期备份。
+

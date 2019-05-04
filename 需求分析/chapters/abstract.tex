@@ -1,12 +1,41 @@
+%!TEX root = ../main.tex
+
 \begin{abstract}
-本文是软件工程需求规格说明书模板，修改自于中国科学技术大学本硕博毕业论文 \LaTeX{} 模板示例文件，该模板由
-zepinglee和seisman创建，遵循中国科学技术大学的论文写作规范，适用于撰写学士、硕士和博士学位论文。
+% 本文是软件工程需求规格说明书模板，修改自于中国科学技术大学本硕博毕业论文 \LaTeX{} 模板示例文件，该模板由
+% zepinglee和seisman创建，遵循中国科学技术大学的论文写作规范，适用于撰写学士、硕士和博士学位论文。
 
-本文档最后一章演示如何使用 \LaTeX{} 的一些基本命令以及本模板提供的一些特殊功能，
-模板的选项及详细用法请参考模板说明文档 ustcthesis.pdf。请在提交之前把最后一掌实例注释掉。
+本文是2019年春季学期软件工程课程的项目需求分析文档，
+	本项目组为课程的第51小组，参与人员为蒋越（组长）、
+	吴昊和莫定衡，本项目组选题为《音乐播放系统》，
+	经商讨，我们将项目名制定为\emph{\proname}。
 
-\keywords{软件工程\zhspace{} 中国科学技术大学\zhspace{} 学位论文\zhspace{} \LaTeX{}~通用模板\zhspace{} 学士\zhspace{}
-硕士\zhspace{} 博士\zhspace{} 示例文档\zhspace{} 模板说明文档}
+% 本文档最后一章演示如何使用 \LaTeX{} 的一些基本命令以及本模板提供的一些特殊功能，
+% 模板的选项及详细用法请参考模板说明文档 ustcthesis.pdf。请在提交之前把最后一掌实例注释掉。
+
+本文档说明了\proname 的功能需求、性能需求、外部接口需求
+	以及项目总体的设计约束。
+同时，我们还针对软件质量特性对本项目的各方面提出了要求，
+	并明确了本项目与其他项目或者库的依赖关系。
+最后，我们对本文档中所提及的需求说明按照优先级进行分级，
+	为项目的实现过程制定了总体规划。
+\iffalse
+\R{
+针对需求进行的更改与新增，我们在该版本中的需求分析中，也进行了
+对应的更新。
+在项目的实施过程中，可以通过进行这些需求更新的对比来确定新的实施细则。
+}
+\fi
+\keywords{
+	软件工程\zhspace{}
+	音乐\zhspace{}
+	多媒体播放技术\zhspace{}
+	网页设计\zhspace{}
+	Web\zhspace{}
+	云同步\zhspace{}
+	排名系统\zhspace{}
+	社区互动\zhspace{}
+	项目需求
+}
 
 \begin{table}[htbp]
 \centering
@@ -15,7 +44,9 @@ zepinglee和seisman创建，遵循中国科学技术大学的论文写作规范�
     \hline
     缩略语 & 英文全名 & 中文解释 \\
     \hline
-    c & d & e\\
+    API & Application Programming Interface & 应用程序接口\\
+    \hline
+    UI & User Interface & 用户接口\\
     \hline
 \end{tabular}
 \end{table}
