@@ -8,20 +8,35 @@
 \bibliographystyle{ustcauthoryear}
 % \bibliographystyle{ustcnumerical}
 
+%\newcommand{\docname}{软件工程作业管理系统}
+%\renewpagestyle{front}[\zihao{-5}]{
+%    \sethead{}{\docname 需求规格说明书}{}
+%    \setfoot{}{\thepage}{}
+%    \headrule
+%}
+%\renewpagestyle{main}[\zihao{-5}]{
+%    \sethead{}{\docname 需求规格说明书}{}
+%    \setfoot{}{\thepage}{}
+%    \headrule
+%}
 
-\newcommand{\docname}{软件工程作业管理系统}
+
+\newcommand{\proname}{沙雕云音乐}
+
+\newcommand{\docname}{\proname (音乐播放系统)}
 \renewpagestyle{front}[\zihao{-5}]{
-    \sethead{}{\docname 需求规格说明书}{}
+    \sethead{}{\docname 需求分析文档}{}
     \setfoot{}{\thepage}{}
     \headrule
 }
 \renewpagestyle{main}[\zihao{-5}]{
-    \sethead{}{\docname 需求规格说明书}{}
+    \sethead{}{\docname 需求分析文档}{}
     \setfoot{}{\thepage}{}
     \headrule
 }
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
-
+% RED information macro
+\newcommand{\R}[1]{\textcolor{red}{#1}}
 \begin{document}
 
 
@@ -30,15 +45,15 @@
 \begin{center}
 ~\\[5cm]
 \HRule \\[0.4cm]
-{\huge \bfseries \docname\\需求规格说明书}\\[0.4cm]
+{\huge \bfseries \docname\\需求分析报告}\\[0.4cm]
 \HRule \\[1.5cm]
 
 \begin{tabular}{ccc}
   & 人员 & 日期 \\ 
-拟制 & 张三\ 李四\ 王五 & yyyy-mm-dd \\ 
-评审人 & • & yyyy-mm-dd \\ 
-批准 & • & yyyy-mm-dd \\ 
-签发 & • & yyyy-mm-dd \\ 
+拟制 & 蒋越\ 吴昊\ 莫定衡 & 2019-05-04 \\ 
+评审人 & • & • \\ 
+批准 & • & • \\ 
+签发 & • & • \\ 
 \end{tabular} 
 
 \end{center}
@@ -64,7 +79,7 @@
 \input{chapters/dependency}
 \input{chapters/importance_of_requirements}
 \input{chapters/to_be_determined}
-\input{chapters/latex_examples}
+
 \bibliography{bib/tex}
 
 \appendix
