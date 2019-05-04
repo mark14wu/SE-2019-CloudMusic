@@ -1,185 +1,1531 @@
+%!TEX root = ../main.tex
+
 \chapter{具体需求}
-% 在每一条需求描述中重复下列部分
+
 \section{功能需求}
-%% 本子章节应描述软件产品的输入怎样被转换成输出。它描述了软件必须执行的基本动作。 
-%% 对每一类功能或有时对每一个单独的功能，必须描述输入、处理、输出方面的需求。这些通常以下面四个子段落来组织：
-\subsection{R.NETHARD.SYS.001 客户端启动}
-%% 用需求编号加上简短词汇做为功能需求名，不要用“功能需求（1）”作为功能名，例如：
-%% R.INTF.CALC.001 计算表达式
-%% R.INTF.CALC.002 打印
-%% 需求编号规则按照软件需求管理规程(REP01)进行
+
+本子章节详细列出了我们产品的各个功能点的输入怎样被转换成输出，
+	并描述了软件必须执行的基本动作。
+
+\subsection{R.CLOUDMUSIC.SYS.001客户端启动}
 \subsubsection{介绍}
-%% 逐条列出与本特性相关的功能需求。包括项目如何响应预期的错误输入，非法条件和无效输入。需求应该简明，完整，不含糊，可验证，必要的。 当需要的信息不确定的时候使用“待定”。
-这里是客户端启动时需要完成的一系列初始化步骤，包括：
-\begin{itemize}
-\item 检查更新;
-\item 应用主页初始化(R.NETHARD.APP.001);
-\item 自动登录(R.NETHARD.USER.001);
-  \item 歌单同步(R.NETHARD.USER.004);
-\item 歌曲商店初始化(R.NETHARD.SHOP.001);
-\end{itemize}
+客户端启动包括以下步骤:
+	\begin{itemize}
+		\item 检查更新;
+		\item 主页初始化(R.CLOUDMUSIC.APP.001);
+		\item 自动登录(R.CLOUDMUSIC.USER.001);
+		\item 同步歌单(R.CLOUDMUSI.USER.004);
+	\end{itemize}
 \subsubsection{输入}
-%% 本子段落应包含下列内容：
-
-%% A. 对该功能所有输入数据的详细描述，包括：
-
-%% 		输入来源
-%% 		数量
-%% 		度量单位
-%% 		时间要求
-%% 		包含精度和容忍度的有效输入范围
-		
-%% B. 在适当的地方提供的对接口规格或接口控制文档的参考。
-\begin{itemize}
-\item \textbf{输入来源}：客户端所在操作系统或浏览器；
-\item \textbf{内容}: 用户打开客户端或者打开网页客户端；
-\item \textbf{有效输入范围}：输入必须合法；
-\end{itemize}
+	\begin{itemize}
+		\item \textbf{输入来源}：客户端所在操作系统或浏览器；
+		\item \textbf{内容}：用户打开了客户端或网页;
+		\item \textbf{有效输入范围}：输入必须合法;
+	\end{itemize}
+\begin{enumerate}
+\item 检测输入是否合法。对于客户端，检查请求来源和格式是否符合要求；对于网页客户端，检测 HTTP 报文是否合法；
+\item 检查更新(R.NETHARD.SYS.003);
+\item 主页初始化(R.NETHARD.APP.001);
+\item 自动登录(R.NETHARD.USER.001);
+\item 歌单同步(R.NETHARD.USER.004);
+\end{enumerate}
+\noindent 异常处理：
+\begin{enumerate}
+\item \textbf{网络错误}: 取消检查更新和自动登录，并在主页初始化时加入报错信息;
+\item \textbf{登录失败}: 提示用户重新登录，取消歌单同步;
+\item \textbf{初始化失败}: 报错，这里包括了主页初始化失败和商店初始化失败;
+  \item \textbf{同步失败}: 重试一定次数后，若仍失败，提示用户;
+\subsubsection{输出}
 \subsubsection{处理}
-%% 本子段落应描述对输入数据所执行的所有操作和如何获得输出的过程。这包括下列规格：
-
-%% A. 输入数据的有效性检测。
-
-%% B. 操作的确切次序，包括各事件的时序。
-
-%% C. 对异常情况的回应，例如：
-%% 		溢出
-%% 		通信失败
-%% 		错误处理
-%% D. 用于把系统输入转换到相应输出的任何方法（诸如方程式，数学算法，逻辑操作）。例如，这可能描述下列方面：
-%% 		对工资单里代扣所得税的计算公式。
-%% 		用于气象预报的气象模型。
-		
-%% E.	对输出数据的有效性检测。
-
-%% 本子段落应包含：
-
-%% A. 对该功能所有输出数据的详细描述，这个描述包括：
-%% 		输出的到何处（如打印机，文件）
-%% 		数量
-%% 		度量单位
-%% 		时序
-%% 		包含精确度和容忍度的有效输出范围
-%% 		对非法值的处理
-%% 		错误消息
-		
-%% B. 在适当的地方提供对接口规格或接口控制文档的参考。
-
-%% 此外，对那些需求集中在输入/输出行为的系统，SRS应描述所有重要的输入/输出行为及输入输出对的次序。对一个需要记忆其行为以根据输入和过去的行为进行反应的系统，输入输出对的次序是要求的；这种功能行为就类似于有限状态机。
 \begin{itemize}
-\item \textbf{输出位置}: 客户端或者网页浏览器;
-\item \textbf{内容}: 初始化完成;
-\item \textbf{有效输出范围}: {失败，成功};
-  \item \textbf{错误信息}: 根据处理方式返回相应的错误信息;
+	\item \textbf{输出位置}：响应操作系统或浏览器的请求；
+	\item \textbf{内容}：通过响应内包含的信息，告知启动初始化完成；
+	\item \textbf{有效输出范围}：响应的标准格式(如 HTTP 报文);
+	\item \textbf{错误消息}：返回在异常处理中生成的错误信息;
+\end{itemize}
+
+\subsection{R.CLOUDMUSIC.SYS.002客户端关闭}
+\subsubsection{介绍}
+客户端关闭包括以下步骤:
+	\begin{itemize}
+		\item 检查是否有下载任务，若有，询问用户是否仍要退出；
+		\item 暂停所有下载;
+		\item 同步歌单(R.CLOUDMUSIC.USER.004)；
+		\item 关闭程序;
+	\end{itemize}
+\subsubsection{输入}
+	\begin{itemize}
+		\item \textbf{输入来源}：客户端所在系统或浏览器;
+		\item \textbf{内容}：用户发出退出指令;
+		\item \textbf{有效输入范围}：需判定为合法的请求;
+	\end{itemize}
+\subsubsection{处理}
+	\begin{enumerate}
+		\item 检测输入有效性，对于软件客户端，检测请求来源和格式是否符合标准，
+			对于网页客户端，检测请求是否是合法的断开连接请求;
+		\item 检测是否有正在运行的下载服务，如果有，询问用户是否仍要退出;
+		\item 断开下载服务;
+		\item 断开流服务;
+	\end{enumerate}
+	\noindent 异常处理:
+	\begin{enumerate}
+		\item \textbf{网络错误}：告知用户同步失败，询问是否重试，
+			若用户选择重试，则重试，否则，放弃同步;
+	\end{enumerate}
+\subsubsection{输出}
+\begin{itemize}
+	\item \textbf{输出位置}：响应系统的请求或响应浏览器的请求;
+	\item \textbf{内容}：通过具体响应，告知关闭完成;
+	\item \textbf{有效输出范围}：按照系统响应请求的方式或者网络服务发出响应报文的
+		正确格式决定相关输出;
+	\item \textbf{错误消息}：返回错误信息，具体方式按照系统响应请求的方式
+		或者网络服务发出响应报文的格式;
+\end{itemize}
+
+\subsection{R.CLOUDMUSIC.SYS.003客户端升级}
+\subsubsection{介绍}
+客户端升级包括以下步骤:
+	\begin{itemize}
+		\item 从服务端下载更新文件;
+		\item 应用升级并重启;
+	\end{itemize}
+\subsubsection{输入}
+	\begin{itemize}
+		\item \textbf{输入来源}：客户端;
+		\item \textbf{内容}：手动升级或自动升级请求;
+		\item \textbf{有效输入范围}：需判定为合法的请求；
+	\end{itemize}
+\subsubsection{处理}
+	\begin{enumerate}
+	\item 检测输入有效性，检测请求来源和格式是否符合标准;
+  \item 下载更新文件和校验信息;
+    \item 校验更新文件;
+		\item 检测是否正在下载，若有，询问用户是否仍要升级;
+		\item 关闭程序(R.CLOUDMUSIC.SYS.002);
+		\item 更新器用更新文件进行更新;
+		\item 完成后，启动程序(R.CLOUDMUSIC.SYS.001);
+	\end{enumerate}
+	\noindent 异常处理：
+	\begin{enumerate}
+		\item \textbf{网络错误}：告知用户更新失败，询问是否重试，
+			若用户选择重试，则重试，否则，放弃更新，启动旧版本；
+		\item \textbf{校验错误}：同\textbf{网络错误}的处理方式；
+	\end{enumerate}
+\subsubsection{输出}
+\begin{itemize}
+	\item \textbf{输出位置}：客户端;
+	\item \textbf{内容}：通过具体响应，告知升级完成;
+	\item \textbf{有效输出范围}：无限制(输入由程序内部生成，完全合法，因而输出也必定合法);
+	\item \textbf{错误消息}：返回客户端升级失败错误信息，通过客户端提示;
+\end{itemize}
+
+\subsection{R.CLOUDMUSIC.USER.001用户登陆}
+\subsubsection{介绍}
+用户登录时需要经过以下步骤：
+	\begin{itemize}
+		\item 检测登录凭证;
+		\item 返回登录结果;
+	\end{itemize}
+\subsubsection{输入}
+	\begin{itemize}
+		\item \textbf{输入来源}: 客户端或网页浏览器;
+		\item \textbf{内容}: 请求来源、用户名、登陆凭据;
+		\item \textbf{有效输入范围}：需判定为合法的登陆请求;
+	\end{itemize}
+	\noindent 登陆凭据包括加密的密码和成功登录后服务器发送的有时限的登录凭据;
+\subsubsection{处理}
+	\begin{enumerate}
+		\item 检测输入有效性，检测请求来源和格式是否符合标准;
+		\item 检查登陆凭据的合法性: 若为加密后的密码，解密后进行校验;
+      若为上一次登录后服务器传回的登陆凭据，则检测其是否已超时或失效;
+		\item 生成登陆凭据，在服务器上记录该凭据;
+		\item 返回凭据;
+	\end{enumerate}
+	\noindent 异常处理：
+	\begin{enumerate}
+		\item \textbf{校验失败}: 返回校验信息失败错误的信息，客户端将请求用户重试;
+		\item \textbf{登录超时}: 返回登录超时的信息，客户端将请求用户手动登陆;
+	\end{enumerate}
+\subsubsection{输出}
+\begin{itemize}
+	\item \textbf{输出位置}: 客户端或网页浏览器;
+	\item \textbf{内容}: 若成功，返回登录凭据; 若失败，返回登陆失败的原因;
+	\item \textbf{有效输出范围}: 无限制;
+	\item \textbf{错误消息}：返回错误信息，告知用户登陆失败及其原因;
+\end{itemize}
+
+\subsection{R.CLOUDMUSIC.USER.002用户注册}
+\subsubsection{介绍}
+用户注册需要完成以下步骤:
+	\begin{itemize}
+		\item 检测注册信息是否合法;
+		\item 在用户数据库中添加用户注册信息;
+		\item 返回注册结果;
+	\end{itemize}
+\subsubsection{输入}
+	\begin{itemize}
+		\item \textbf{输入来源}: 客户端或网页浏览器;
+		\item \textbf{内容}: 请求来源、注册信息;
+		\item \textbf{有效输入范围}: 需判定为合法的注册请求;
+	\end{itemize}
+	\noindent 其中，注册信息具体包括：
+	\begin{itemize}
+		\item 用户名 
+		\item 密码
+		\item 邮箱
+    \item 手机号
+	\end{itemize}
+\subsubsection{处理}
+	\begin{enumerate}
+		\item 检测输入有效性，检测请求来源和格式是否符合标准;
+		\item 检查使用的用户名、邮箱和手机号是否在数据库中有重复，使用的字符和长度是否
+			是符合要求的;
+		\item 检查使用的密码，是否符合复杂度要求;
+		\item 返回注册结果;
+	\end{enumerate}
+	\noindent 异常处理: 
+	\begin{enumerate}
+		\item \textbf{用户名重复}：
+		  客户端请求用户更换用户名，并提供一些可能的用户名替换方案;
+    \item \textbf{邮箱重复}:
+      客户端请求用户更换注册邮箱或者通过邮箱登录;
+    \item \textbf{手机号已绑定}:
+      客户端请求客户更换手机号或者通过手机号登录;
+		\item \textbf{密码过于简单}:
+      客户端请求用户使用更复杂的密码;
+	\end{enumerate}
+\subsubsection{输出}
+\begin{itemize}
+	\item \textbf{输出位置}：客户端或网页浏览器；
+	\item \textbf{内容}：若成功，返回成功信息，若失败，返回注册失败的原因;
+	\item \textbf{有效输出范围}：无限制;
+	\item \textbf{错误消息}：返回错误信息，告知用户注册失败的原因，并按照情况处理;
+\end{itemize}
+
+\subsection{R.CLOUDMUSIC.USER.003用户注销}
+\subsubsection{介绍}
+用户注销步骤如下:
+	\begin{itemize}
+		\item 在服务端记录注销的信息，并使相应登陆凭据失效;
+	\end{itemize}
+\subsubsection{输入}
+	\begin{itemize}
+		\item \textbf{输入来源}: 客户端或网页浏览器;
+		\item \textbf{内容}: 请求来源，注销的用户信息;
+		\item \textbf{有效输入范围}: 需判定为合法的登陆请求;
+	\end{itemize}
+\subsubsection{处理}
+	\begin{enumerate}
+		\item 检测输入有效性，检测请求来源和格式是否符合标准;
+		\item 检查注销请求是否合法;
+		\item 在服务器上使相应的用户登陆凭据失效;
+		\item 返回结果;
+	\end{enumerate}
+	\noindent 异常处理：
+	\begin{enumerate}
+		\item \textbf{校验失败}：返回注销失败的信息，客户端放弃注销;
+	\end{enumerate}
+\subsubsection{输出}
+\begin{itemize}
+	\item \textbf{输出位置}：客户端或网页浏览器;
+	\item \textbf{内容}：若成功，返回注销成功的信息，
+		若失败，返回注销失败的原因;
+	\item \textbf{有效输出范围}：无限制;
+	\item \textbf{错误消息}：返回错误信息，告知用户注销失败的原因，并按照情况处理;
+\end{itemize}
+
+\subsection{R.CLOUDMUSIC.APP.001生成主页界面}
+\subsubsection{介绍}
+生成主页步骤：
+	\begin{itemize}
+		\item 生成主页界面的内容;
+	\end{itemize}
+\subsubsection{输入}
+	\begin{itemize}
+		\item \textbf{输入来源}：客户端或网页浏览器;
+		\item \textbf{内容}：客户端或者网页的界面;
+		\item \textbf{有效输入范围}：需判定为合法的请求;
+	\end{itemize}
+\subsubsection{处理}
+	\begin{enumerate}
+		\item 检测输入有效性，检测请求来源和格式是否符合标准;
+		\item 生成界面元素，详见\ref{ssec:ui}；
+		\item 返回完成的信息;
+	\end{enumerate}
+\subsubsection{输出}
+\begin{itemize}
+	\item \textbf{输出位置}：客户端或网页浏览器；
+	\item \textbf{内容}：告知生成完成；
+	\item \textbf{有效输出范围}：无限制
+	\item \textbf{错误消息}：不会产生异常，否则，程序崩溃并产生崩溃日志;
+\end{itemize}
+
+\subsection{R.CLOUDMUSIC.APP.002生成歌单界面}
+\subsubsection{介绍}
+生成歌单步骤：
+	\begin{itemize}
+		\item 判断是否具有歌单读取权限;
+		\item 加载歌单内容;
+	\end{itemize}
+\subsubsection{输入}
+	\begin{itemize}
+		\item \textbf{输入来源}：客户端或网页浏览器;
+		\item \textbf{内容}：请求的歌单id以及用户登录凭证;
+		\item \textbf{有效输入范围}：需判定为合法的请求;
+	\end{itemize}
+\subsubsection{处理}
+	\begin{enumerate}
+		\item 检测输入有效性，检测请求来源和格式是否符合标准；
+		\item 检测登陆凭据，若校验失败或登录超时，抛出相应异常;
+		\item 检查歌单ID是否存在，若不存在，抛出相应异常;
+		\item 检查歌单的可访问性，若为非公开的，则检查登录凭证对应的用户是否有读取权限，若否，抛出相应异常;
+		\item 生成歌单界面元素，详见\ref{ssec:ui}；
+		\item 返回完成的信息;
+	\end{enumerate}
+	\noindent 异常处理：
+	\begin{enumerate}
+		\item \textbf{登录信息失败}：返回登陆信息失效，客户端将请求用户重新手动登陆;
+		\item \textbf{歌单ID不存在}：返回歌单不存在，客户端将展示歌单不存在页面;
+		\item \textbf{歌单不可访问}：返回歌单无法访问，客户端将展示歌单不存在页面，若没有登录，询问是否要登陆;
+	\end{enumerate}
+\subsubsection{输出}
+\begin{itemize}
+	\item \textbf{输出位置}：客户端或网页浏览器;
+	\item \textbf{内容}：若成功，返回 歌单界面生成完成的信息 ，若失败，返回 失败的原因；
+	\item \textbf{有效输出范围}：无限制;
+	\item \textbf{错误消息}：返回错误信息，告知用户查看失败的原因，并按照情况处理；
+\end{itemize}
+
+\subsection{R.CLOUDMUSIC.APP.003生成歌曲播放界面}
+\subsubsection{介绍}
+生成歌曲播放界面的步骤:
+	\begin{itemize}
+		\item 判断歌曲是否可读;
+		\item 生成歌曲播放界面的内容；
+	\end{itemize}
+\subsubsection{输入}
+	\begin{itemize}
+		\item \textbf{输入来源}：客户端或网页浏览器；
+		\item \textbf{内容}：请求的音乐ID以及用户登录凭证;
+		\item \textbf{有效输入范围}：需判定为合法的请求；
+	\end{itemize}
+\subsubsection{处理}
+	\begin{enumerate}
+		\item 检测输入有效性，检测请求来源和格式是否符合标准；
+		\item 检测登陆凭据，若校验失败或登录超时，返回对应错误，不进入下一步；
+		\item 检查歌曲ID是否存在，若不存在，返回对应错误，不进入下一步；
+		\item 检查歌曲的可访问性，若为付费的音乐，检查用户凭证对应的账户是否对其有播放权，
+			若否或没有登录，返回错误信息;
+		\item 若具有播放权，生成完整播放界面;
+		\item 具体界面要求详见\ref{ssec:ui}；
+		\item 返回完成的信息;
+	\end{enumerate}
+	\noindent 异常处理：
+	\begin{enumerate}
+		\item \textbf{登录信息失败}：返回登陆信息失效，客户端将请求用户重新手动登陆;
+		\item \textbf{歌曲ID不存在}：返回歌曲不存在，客户端将展示错误页面；
+		\item \textbf{歌曲不可访问}：返回歌曲无法访问，客户端询问是否要购买；
+	\end{enumerate}
+\subsubsection{输出}
+\begin{itemize}
+	\item \textbf{输出位置}：客户端或网页浏览器；
+	\item \textbf{内容}：若成功，返回音乐播放界面生成完成的信息; 若失败，返回错误信息;
+	\item \textbf{有效输出范围}：无限制;
+	\item \textbf{错误消息}：返回错误信息，告知用户尝试进入播放界面失败的原因，并按照情况处理；
+\end{itemize}
+
+\subsection{R.CLOUDMUSIC.APP.004生成歌曲推荐界面}
+\subsubsection{介绍}
+生成歌曲推荐界面步骤如下: 
+	\begin{itemize}
+		\item 判定用户的登录状态;
+		\item 生成歌曲推荐界面的内容;
+	\end{itemize}
+\subsubsection{输入}
+	\begin{itemize}
+		\item \textbf{输入来源}：客户端或网页浏览器;
+		\item \textbf{内容}：请求的来源以及用户登录凭证;
+		\item \textbf{有效输入范围}：需判定为合法的请求;
+	\end{itemize}
+\subsubsection{处理}
+	\begin{enumerate}
+		\item 检测输入有效性，检测请求来源和格式是否符合标准；
+		\item 检测登陆凭据，若校验失败或登录超时，抛出相应异常;
+    \item 检测是否登录，若登录，则从服务器获取个性化推荐信息(R.CLOUDMUSIC.RECOMMEND.001)
+		\item 从服务器获取音乐排名信息(R.CLOUDMUSIC.RECOMMEND.002)
+		\item 生成音乐推荐界面, 详见\ref{ssec:ui}；
+		\item 返回完成的信息;
+	\end{enumerate}
+	\noindent 异常处理: 
+	\begin{enumerate}
+		\item \textbf{登录信息失败}: 返回登陆信息失效，客户端将请求用户重新手动登陆;
+		\item \textbf{网络访问}: 返回网络错误的信息，客户端请求用户检查网络状态;
+	\end{enumerate}
+\subsubsection{输出}
+\begin{itemize}
+	\item \textbf{输出位置}: 客户端或网页浏览器;
+	\item \textbf{内容}: 若成功，返回音乐推荐界面生成完成，若失败，返回报错信息;
+	\item \textbf{有效输出范围}: 无限制;
+	\item \textbf{错误消息}: 返回错误信息，告知用户进入推荐界面失败的原因;
+\end{itemize}
+
+\subsection{R.CLOUDMUSIC.APP.005生成账户界面}
+\subsubsection{介绍}
+	这是在 生成账户界面 时，我们需要处理的功能点，包括: 
+	\begin{itemize}
+		\item 判定用户的登录状态；
+		\item 生成对应的账户界面的内容；
+	\end{itemize}
+\subsubsection{输入}
+	\begin{itemize}
+		\item \textbf{输入来源}: 客户端或网页浏览器；
+		\item \textbf{内容}: 请求的来源以及用户登录凭证（可选）；
+		\item \textbf{有效输入范围}: 需判定为合法的请求；
+	\end{itemize}
+\subsubsection{处理}
+	\begin{enumerate}
+		\item 检测输入有效性，检测请求来源和格式是否符合标准；
+		\item 若没有登陆，生成登陆界面，也要提供注册功能的入口；
+		\item 检测登陆凭据，若校验失败或登录超时，返回对应错误，不进入下一步；
+		\item 向服务器请求用户的数据；
+		\item 生成用户的界面信息元素，具体的界面要求，请参照小节\ref{ssec:ui}；
+		\item 返回完成的信息；
+	\end{enumerate}
+	\noindent 异常处理: 
+	\begin{enumerate}
+		\item \textbf{登录信息失败}: 返回登陆失败错误的信息，客户端将请求用户重登陆；
+		\item \textbf{网络访问}: 返回网络错误的信息，客户端提示无法查看，
+			请求用户检查网络状态；
+	\end{enumerate}
+\subsubsection{输出}
+\begin{itemize}
+	\item \textbf{输出位置}: 客户端或网页浏览器；
+	\item \textbf{内容}: 若成功，返回 账户界面生成完成的信息 ，若失败，返回 失败的原因；
+	\item \textbf{有效输出范围}: 无限制（根据服务端的程序逻辑，不会产生非法响应）；
+	\item \textbf{错误消息}: 返回错误信息，告知用户尝试进入账户界面失败的原因，
+		并按照情况处理；
+\end{itemize}
+
+\R {
+\subsection{R.CLOUDMUSIC.APP.006生成私人空间界面}
+\subsubsection{介绍}
+	这是在 生成私人空间界面 时，我们需要处理的功能点，包括: 
+	\begin{itemize}
+		\item 判定访问用户的登录状态；
+		\item 判定被访问用户私人空间的可访问状态；
+		\item 生成对应的私人空间界面的内容；
+	\end{itemize}
+\subsubsection{输入}
+	\begin{itemize}
+		\item \textbf{输入来源}: 客户端或网页浏览器；
+		\item \textbf{内容}: 请求的来源以及用户登录凭证（可选），被访问用户的身份标识；
+		\item \textbf{有效输入范围}: 需判定为合法的请求，
+			需要检验访问用户的身份标识的有效性；
+	\end{itemize}
+\subsubsection{处理}
+	\begin{enumerate}
+		\item 检测输入有效性，检测请求来源和格式是否符合标准；
+		\item 检测登陆凭据，若校验失败或登录超时，返回对应错误，不进入下一步；
+		\item 检测登陆被访问用户的身份标识，
+			若校验失败，返回对应错误，不进入下一步；
+		\item 向服务器请求被访问用户的数据；
+		\item 生成被访问用户的私人空间的界面信息元素，
+			具体的界面要求，请参照小节\ref{ssec:ui}；
+		\item 返回完成的信息；
+	\end{enumerate}
+	\noindent 异常处理: 
+	\begin{enumerate}
+		\item \textbf{登录信息失败}: 返回登陆失败错误的信息，客户端将请求用户重登陆；
+		\item \textbf{被访问用户身份标识检查失败}: 告知用户访问失败，并说明被访问的用户不存在；
+		\item \textbf{网络访问}: 返回网络错误的信息，客户端提示无法查看，
+			请求用户检查网络状态；
+	\end{enumerate}
+\subsubsection{输出}
+\begin{itemize}
+	\item \textbf{输出位置}: 客户端或网页浏览器；
+	\item \textbf{内容}: 若成功，返回 被访问用户的人看见界面生成完成的信息 ，若失败，返回 失败的原因；
+	\item \textbf{有效输出范围}: 无限制（根据服务端的程序逻辑，不会产生非法响应）；
+	\item \textbf{错误消息}: 返回错误信息，告知用户尝试进入私人空间界面失败的原因，
+		并按照情况处理；
+\end{itemize}
+}
+ 
+\subsection{\R{R.CLOUDMUSIC.APP.007生成设置界面}}
+\subsubsection{介绍}
+	这是在 生成设置界面 时，我们需要处理的功能点，包括: 
+	\begin{itemize}
+		\item 生成设置界面的内容；
+	\end{itemize}
+\subsubsection{输入}
+	\begin{itemize}
+		\item \textbf{输入来源}: 客户端或网页浏览器；
+		\item \textbf{内容}: 请求的来源；
+		\item \textbf{有效输入范围}: 需判定为合法的请求；
+	\end{itemize}
+\subsubsection{处理}
+	\begin{enumerate}
+		\item 检测输入有效性，检测请求来源和格式是否符合标准；
+		\item 读取当前的用户设置信息；
+		\item 生成对应的设置界面，请参照小节\ref{ssec:ui}；
+		\item 返回完成的信息；
+	\end{enumerate}
+\subsubsection{输出}
+\begin{itemize}
+	\item \textbf{输出位置}: 客户端或网页浏览器；
+	\item \textbf{内容}: 若成功，返回 设置界面生成完成的信息 ，若失败，返回 失败的原因；
+	\item \textbf{有效输出范围}: 无限制（根据服务端的程序逻辑，不会产生非法响应）；
+	\item \textbf{错误消息}: 理论上，该界面不应该发生错误，若有，则应当视为程序BUG；
+\end{itemize}
+\R{
+\subsubsection{备注}
+该小节，需求编号由原R.CLOUDMUSIC.APP.006更改为R.CLOUDMUSIC.APP.007。
+	}
+
+\subsection{R.CLOUDMUSIC.MUSIC.001音乐播放控制}
+\subsubsection{介绍}
+	这是在 处于音乐播放的状态下 时，我们需要处理的功能点，包括: 
+	\begin{itemize}
+		\item 响应一系列控制请求；
+		\item 处理音乐的播放需求；
+	\end{itemize}
+\subsubsection{输入}
+	\begin{itemize}
+		\item \textbf{输入来源}: 客户端或网页浏览器；
+		\item \textbf{内容}: 对音乐的控制请求，可能有以下具体需求: 
+		\begin{enumerate}
+			\item 播放/暂停状态转换
+			\item 下一曲/上一曲
+			\item 进度条控制，需提供目标时间戳
+			\item 播放的歌曲的跳转，需提供音乐ID
+			\item 显示/隐藏歌词
+			\item 切换列表播放模式
+		\end{enumerate}
+		\item \textbf{有效输入范围}: 需要判断请求的合法性，具体如下: 
+		\begin{itemize}
+			\item 对于 进度条控制，需检查时间戳的合法性；
+			\item 对于 歌曲跳转，需要判断ID的合法性，以及是否有访问权； 
+		\end{itemize}
+	\end{itemize}
+\subsubsection{处理}
+	\begin{enumerate}
+		\item 检测输入有效性，检测请求来源和格式是否符合标准；
+		\item 对于输入的控制分别做处理: 
+		\begin{enumerate}
+			\item \textbf{播放/暂停状态转换}: 
+				转换歌曲的播放或暂停状态；
+			\item \textbf{下一曲/上一曲}: 
+				根据播放列表和列表播放模式，操作播放的音乐；
+			\item \textbf{进度条控制，需提供目标时间戳}: 
+				首先判断时间戳输入的合法性（是否超出音乐时间的范围），
+				然后跳转至该时间戳；
+			\item \textbf{播放的歌曲的跳转，需提供音乐ID}: 
+				首先判断ID输入的合法性（是否是无效的ID或者没有访问权限），
+				然后跳转至该时间戳；
+			\item \textbf{显示/隐藏歌词}: 
+				切换歌词的展示状态
+			\item \textbf{切换列表播放模式}: 
+				切换列表循环模式，在以下四项中循环切换: 
+					\begin{itemize}
+						\item 列表顺序不循环播放
+						\item 列表顺序循环播放
+						\item 列表随机循环播放
+						\item 单曲循环播放
+					\end{itemize}
+		\end{enumerate}
+		\item 返回完成的信息；
+	\end{enumerate}
+\subsubsection{输出}
+\begin{itemize}
+	\item \textbf{输出位置}: 客户端或网页浏览器；
+	\item \textbf{内容}: 若成功，返回操作完成的信息 ，若失败，返回失败的原因；
+	\item \textbf{有效输出范围}: 无限制（根据服务端的程序逻辑，不会产生非法响应）；
+	\item \textbf{错误消息}: 返回错误信息，告知客户端操作失败的原因，
+		但由于无效的操作不应该被发出，所以一般不会发生；
+\end{itemize}
+
+\subsection{R.CLOUDMUSIC.MUSIC.002音乐串流控制}
+\subsubsection{介绍}
+	这是在 处于音乐串流情形下 时，我们需要处理的功能点，包括: 
+	\begin{itemize}
+		\item 连接服务器，验证串流可访问性；
+		\item 处理音乐的串流需求；
+	\end{itemize}
+\subsubsection{输入}
+	\begin{itemize}
+		\item \textbf{输入来源}: 客户端或网页浏览器；
+		\item \textbf{内容}: 对音乐的串流请求，包括: 
+		\begin{enumerate}
+			\item 串流音乐的ID；
+			\item 串流的目标时间戳；
+			\item 串流的预缓存长度；
+			\item 用户登陆凭据（可选）；
+		\end{enumerate}
+		\item \textbf{有效输入范围}: 需要判断请求的合法性，具体如下: 
+		\begin{itemize}
+			\item 若有用户登陆凭据，需对其校验； 
+			\item 需要判断ID的合法性，以及是否有访问权；
+			\item 需判断时间戳的合法性； 
+		\end{itemize}
+	\end{itemize}
+\subsubsection{处理}
+	\begin{enumerate}
+		\item 检测输入有效性，检测请求来源和格式是否符合标准；
+		\item 若有用户登陆凭据，验证其合法性；
+		\item 检查音乐ID的合法性，是否对当前的账户可访问，若
+			是付费音乐，查看其是否可以试听，若可以，则进入试听模式，
+			否则，拒绝串流请求；
+		\item 检查时间戳合法性，检查预缓存长度是否超出限制；
+		\item 返回对应的串流响应，建立串流连接；
+	\end{enumerate}
+\subsubsection{输出}
+\begin{itemize}
+	\item \textbf{输出位置}: 客户端或网页浏览器；
+	\item \textbf{内容}: 若成功，返回对应的串流响应 ，若失败，返回失败的原因；
+	\item \textbf{有效输出范围}: 无限制（根据服务端的程序逻辑，不会产生非法响应）；
+	\item \textbf{错误消息}: 按照系统响应请求的方式或者网络服务发出响应报文的
+		正确格式决定相关输出；
+\end{itemize}
+
+\subsection{R.CLOUDMUSIC.MUSIC.003音乐下载控制}
+\subsubsection{介绍}
+	这是在 处理音乐下载请求 时，我们需要处理的功能点，包括: 
+	\begin{itemize}
+		\item 连接服务器，验证音乐是否可下载；
+		\item 处理音乐的下载请求；
+	\end{itemize}
+\subsubsection{输入}
+	\begin{itemize}
+		\item \textbf{输入来源}: 客户端或网页浏览器；
+		\item \textbf{内容}: 对音乐的下载请求，包括: 
+		\begin{enumerate}
+			\item 下载音乐的ID；
+			\item 下载音乐的音质（可选）；
+			\item 用户登陆凭据（可选）；
+		\end{enumerate}
+		\item \textbf{有效输入范围}: 需要判断请求的合法性，具体如下: 
+		\begin{itemize}
+			\item 若有用户登陆凭据，需对其校验； 
+			\item 需要判断ID的合法性，以及是否有访问权；
+		\end{itemize}
+	\end{itemize}
+\subsubsection{处理}
+	\begin{enumerate}
+		\item 检测输入有效性，检测请求来源和格式是否符合标准；
+		\item 若有用户登陆凭据，验证其合法性；
+		\item 检查音乐ID的合法性，是否对当前的账户可下载，
+			否则，拒绝下载请求；
+		\item 检查音质选项的合法性，若没有音质选项，使用默认设置；
+		\item 返回对应的下载响应，建立下载连接；
+	\end{enumerate}
+\subsubsection{输出}
+\begin{itemize}
+	\item \textbf{输出位置}: 客户端或网页浏览器；
+	\item \textbf{内容}: 若成功，返回对应的下载响应 ，若失败，返回失败的原因；
+	\item \textbf{有效输出范围}: 无限制（根据服务端的程序逻辑，不会产生非法响应）；
+	\item \textbf{错误消息}: 按照系统响应请求的方式或者网络服务发出响应报文的
+		正确格式决定相关输出；
+\end{itemize}
+
+\subsection{R.CLOUDMUSIC.SHOP.001购买音乐}
+\subsubsection{介绍}
+	这是在 处理音乐购买请求 时，我们需要处理的功能点，包括: 
+	\begin{itemize}
+		\item 连接服务器，验证音乐的价格；
+		\item 验证支付信息的真伪；
+		\item 在数据库中修改账户的音乐访问权；
+	\end{itemize}
+\subsubsection{输入}
+	\begin{itemize}
+		\item \textbf{输入来源}: 客户端或网页浏览器；
+		\item \textbf{内容}: 对音乐的购买请求，包括: 
+		\begin{enumerate}
+			\item 购买音乐的ID的集合（可以一次购买多首）；
+			\item 用户登陆凭据；
+			\item 用户完成支付的凭据（内部或外部）；
+		\end{enumerate}
+		\item \textbf{有效输入范围}: 需要判断请求的合法性，具体如下: 
+		\begin{itemize}
+			\item 若有用户登陆凭据，需对其校验； 
+			\item 需要判断ID的合法性；
+		\end{itemize}
+	\end{itemize}
+\subsubsection{处理}
+	\begin{enumerate}
+		\item 检测输入有效性，检测请求来源和格式是否符合标准；
+		\item 若有用户登陆凭据，验证其合法性；
+		\item 检查音乐ID的合法性，是否已经在当前账户的已购买数据库中；
+		\item 检查支付凭据的真伪；
+		\item 在数据库中修改账户的音乐访问权；
+		\item 返回对应的购买成功响应，提示用户是否开始下载对应音乐；
+	\end{enumerate}
+	\noindent 异常处理: 
+	\begin{enumerate}
+		\item \textbf{登录信息失败}: 返回登陆失败错误的信息，客户端将请求用户重登陆；
+		\item \textbf{网络访问}: 返回网络错误的信息，客户端提示用户检查网络状态；
+	\end{enumerate}
+\subsubsection{输出}
+\begin{itemize}
+	\item \textbf{输出位置}: 客户端或网页浏览器；
+	\item \textbf{内容}: 若成功，返回对应的成功响应 ，若失败，返回失败的原因；
+	\item \textbf{有效输出范围}: 无限制（根据服务端的程序逻辑，不会产生非法响应）；
+	\item \textbf{错误消息}: 按照系统响应请求的方式或者网络服务发出响应报文的
+		正确格式决定相关输出；
+\end{itemize}
+
+\R{
+\subsection{R.CLOUDMUSIC.SHOP.002购买会员}
+\subsubsection{介绍}
+	注: 会员功能在原本的需求分析中也存在，但是现在将它规划得更为具体了。
+	这是在 处理会员购买请求 时，我们需要处理的功能点，包括: 
+	\begin{itemize}
+		\item 连接服务器，验证会员的价格；
+		\item 验证支付信息的真伪；
+		\item 在数据库中修改账户的音乐访问权；
+	\end{itemize}
+\subsubsection{输入}
+	\begin{itemize}
+		\item \textbf{输入来源}: 客户端或网页浏览器；
+		\item \textbf{内容}: 对会员的购买请求，包括: 
+		\begin{enumerate}
+			\item 用户登陆凭据；
+			\item 购买会员的时长；
+			\item 是否自动续费；
+			\item 用户完成支付的凭据（内部或外部）；
+		\end{enumerate}
+		\item \textbf{有效输入范围}: 需要判断请求的合法性，具体如下: 
+		\begin{itemize}
+			\item 若有用户登陆凭据，需对其校验； 
+		\end{itemize}
+	\end{itemize}
+\subsubsection{处理}
+	\begin{enumerate}
+		\item 检测输入有效性，检测请求来源和格式是否符合标准；
+		\item 若有用户登陆凭据，验证其合法性；
+		\item 检查支付凭据的真伪；
+		\item 在数据库中修改账户的音乐访问权；
+		\item 若要求自动续费，检查支付方式是否支持，
+			若不支持，返回对应提示；
+		\item 返回对应的购买成功响应，提示用户是否开始下载对应音乐；
+	\end{enumerate}
+	\noindent 异常处理: 
+	\begin{enumerate}
+		\item \textbf{登录信息失败}: 返回登陆失败错误的信息，客户端将请求用户重登陆；
+		\item \textbf{网络访问}: 返回网络错误的信息，客户端提示用户检查网络状态；
+		\item \textbf{支付方式不支持}: 返回对应错误的信息，客户端提示用户无法设置自动续费，
+			并建议用户绑定新的支付方式；
+	\end{enumerate}
+\subsubsection{输出}
+\begin{itemize}
+	\item \textbf{输出位置}: 客户端或网页浏览器；
+	\item \textbf{内容}: 若成功，返回对应的成功响应 ，若失败，返回失败的原因；
+	\item \textbf{有效输出范围}: 无限制（根据服务端的程序逻辑，不会产生非法响应）；
+	\item \textbf{错误消息}: 按照系统响应请求的方式或者网络服务发出响应报文的
+		正确格式决定相关输出；
+\end{itemize}
+}
+
+\subsection{R.CLOUDMUSIC.SYNC.001数据同步上传}
+\subsubsection{介绍}
+	这是在 处理数据同步上传请求 时，我们需要处理的功能点，包括: 
+	\begin{itemize}
+		\item 连接服务器，验证账户登陆凭据；
+		\item 上传数据至服务器；
+	\end{itemize}
+\subsubsection{输入}
+	\begin{itemize}
+		\item \textbf{输入来源}: 客户端或网页浏览器；
+		\item \textbf{内容}: 对数据同步上传请求，包括: 
+		\begin{enumerate}
+			\item 用户登陆凭据；
+			\item 当前时间；
+			\item 变更的摘要；
+		\end{enumerate}
+		\item \textbf{有效输入范围}: 需要判断请求的合法性，具体如下: 
+		\begin{itemize}
+			\item 对于用户登陆凭据，需对其校验； 
+			\item 对于时间，需验证是否为更新的数据； 
+		\end{itemize}
+	\end{itemize}
+\subsubsection{处理}
+	\begin{enumerate}
+		\item 检测输入有效性，检测请求来源和格式是否符合标准；
+		\item 若有用户登陆凭据，验证其合法性；
+		\item 检查服务器中的数据库，检查是否有更新的数据；
+		\item 根据数据变更的摘要，对服务器端做数据接收的准备；
+		\item 建立服务器信道，返回响应，进行用户数据的上传；
+	\end{enumerate}
+	\noindent 异常处理: 
+	\begin{enumerate}
+		\item \textbf{登录信息失败}: 返回登陆失败错误的信息，客户端将请求用户重登陆；
+		\item \textbf{网络访问}: 返回网络错误的信息，客户端提示用户检查网络状态；
+	\end{enumerate}
+\subsubsection{输出}
+\begin{itemize}
+	\item \textbf{输出位置}: 客户端或网页浏览器；
+	\item \textbf{内容}: 若成功，返回对应的成功响应 ，若失败，返回失败的原因；
+	\item \textbf{有效输出范围}: 无限制（根据服务端的程序逻辑，不会产生非法响应）；
+	\item \textbf{错误消息}: 按照系统响应请求的方式或者网络服务发出响应报文的
+		正确格式决定相关输出；
+\end{itemize}
+
+\subsection{R.CLOUDMUSIC.SYNC.002数据同步下载}
+\subsubsection{介绍}
+	这是在 处理数据同步下载请求 时，我们需要处理的功能点，包括: 
+	\begin{itemize}
+		\item 连接服务器，验证账户登陆凭据；
+		\item 下载数据至客户端；
+	\end{itemize}
+\subsubsection{输入}
+	\begin{itemize}
+		\item \textbf{输入来源}: 客户端；
+		\item \textbf{内容}: 对数据同步下载请求，包括: 
+		\begin{enumerate}
+			\item 用户登陆凭据；
+			\item 请求数据的范围；
+		\end{enumerate}
+		\item \textbf{有效输入范围}: 需要判断请求的合法性，具体如下: 
+		\begin{itemize}
+			\item 对于用户登陆凭据，需对其校验； 
+			\item 对于请求数据的范围，需验证是否已在数据库中； 
+		\end{itemize}
+	\end{itemize}
+\subsubsection{处理}
+	\begin{enumerate}
+		\item 检测输入有效性，检测请求来源和格式是否符合标准；
+		\item 若有用户登陆凭据，验证其合法性；
+		\item 检查服务器中的数据库，检查是否请求数据的范围内的所有数据；
+		\item 根据请求数据的范围，对服务器端做传输数据的准备；
+		\item 建立服务器信道，返回响应，进行用户数据的下载；
+	\end{enumerate}
+	\noindent 异常处理: 
+	\begin{enumerate}
+		\item \textbf{登录信息失败}: 返回登陆失败错误的信息，客户端将请求用户重登陆；
+		\item \textbf{网络访问}: 返回网络错误的信息，客户端提示用户检查网络状态；
+	\end{enumerate}
+\subsubsection{输出}
+\begin{itemize}
+	\item \textbf{输出位置}: 客户端或网页浏览器；
+	\item \textbf{内容}: 若成功，返回对应的成功响应 ，若失败，返回失败的原因；
+	\item \textbf{有效输出范围}: 无限制（根据服务端的程序逻辑，不会产生非法响应）；
+	\item \textbf{错误消息}: 按照系统响应请求的方式或者网络服务发出响应报文的
+		正确格式决定相关输出；
+\end{itemize}
 
 \section{性能需求}
-<If there are performance requirements, state them here and explain their rationale, to help the developers understand the intent and make suitable design choices. Specifies the timing relationships for real time systems. Such requirements should be made as specific as possible. >
 
-如果有性能方面的需求，在这里列出并解释他们的原理。以帮助开发者理解意图以做出正确的设计选择。在实时系统中的时序关系。保证需求尽可能的详细而精确。
-\subsection{性能需求1}
-Describes the statically and dynamically quantized requirements on the software (or the interaction between user and the software)
-Static quantized requirement could include:
-A. Maximum number of terminal supported.
-B. Maximum number of users that can use the software at the same time.
-C. Maximum number of files and records to be processed
-D. Maximum size of  tables and files
-Dynamically quantized requirements could include:
-A. Specific duration of normal value and peak value of workload (e.g., one hour)
-B. Number of event and task and data volume to be processed 
-All these requirements should be described by measurable term, for example, saying "95% of the events should be processed in 1 second", instead of saying "the operator need not wait for the business to complete."
-Note: The quantized constraint of a detailed requirement should be described in the subsection of the detailed requirement.
-本子章节应从整体上描述静态和动态的量化的对软件（或人与软件交互）的需求。
+\subsection{服务器响应需求}
+\begin{enumerate}
+	\item 对于响应R.CLOUDMUSIC.USER.001 $\sim$ 003的用户相关响应需求，
+		以及R.CLOUDMUSIC.MUSIC.001 $\sim$ 003
+		之中的服务器信道建立响应，需要在尽量少的时间内使用户得到
+		响应，对于HTTP连接的响应，一般需要控制在500ms以下，
+		不然会造成用户体验的下降；
+	\item 对于R.CLOUDMUSIC.SHOP.001 $\sim$ 002中的支付相关的响应需求，
+		由于可能向外部的支付机构查询相关订单的真伪，
+		对于响应的延时，可以放宽要求至3500ms以下，
+\end{enumerate}
 
-静态的量化需求可能包括：
+\subsection{服务器带宽需求}
+\begin{enumerate}
+	\item 对于响应R.CLOUDMUSIC.MUSIC.001 $\sim$ 003
+		之中的音乐播放、串流、下载服务，
+		需要以较快的速度进行数据的传输。
+	\item 由于音乐文件一般不大，对于播放、串流一般音质的音乐文件，
+		我们一般只需要保证每用户稳定的100KB/s的下行速度；
+	\item 对于下载请求，我们需要使用户尽快得到需要的文件，
+		应尽可能保证每用户稳定的2.5MB/s的下行速度；
+	\item 在服务器峰值时，应合理分配下载音乐使用的带宽，
+		使得其他用户的播放、串流需求不受影响，
+		这种情形下，应保证每用户稳定的512KB/s的下行速度；
+\end{enumerate}
 
-A. 支持的终端数目。
+\subsection{数据库性能需求}
+\begin{enumerate}
+	\item 为了提供高并发访问，需要支持高并发的数据库或分布式数据库网络，
+		每秒查询数在至少在100,000,000条以上。
+	\item 为了保证不同音乐文件以及用户数据的存储，
+		数据库应保证不少于10PB (10,000TB)的存储容量。
+\end{enumerate}
 
-B. 支持的同时使用的用户数目。
-
-C.处理的文件和记录的数目。
-
-D.表和文件的大小。
-
-动态的量化需求可能包括:
-
-A. 在正常和峰值工作量条件下特定时间段（如一小时）
-
-B. 处理的事务和任务的数目以及数据量。
-
-所有的这些需求应以可测量的术语进行描述，例如所有的操作应在1秒内被处理完成，而不是描述成操作员不必等待操作的完成。
-
-注意： 用于一个具体功能的量化限制通常在该功能的处理子章节中描述。
 \section{外部接口需求}
 \subsection{用户接口}
-<The interface of the system with the User and vice versa should be explained in detail. >
+\label{ssec:ui}
 
-详细描述系统与用户之间的接口
+\subsubsection{PC客户端用户接口} % (fold)
+本小节讲述在PC客户端上，用户接口应具有的设计需求。
 
-This section should include:
-A. Features that must be supported by the software for eachman-machine interface. For example, if the user operates from a display terminal, then the following should be included:
-		Screen format required
-		Page layout and content of report and menu
-		Timing sequence for input and output
-		Usage of some functional key combinations
-B. Every aspect about the use of the system's user interface. It could be a list that shows the user what should do and what should not do.  For example, an option of overlong or overshort message. . And same as other requirements, these requirements should be easily verified. For example, saying "A level 4 typist can finish function X in Z minutes after a one-hour training." instead of "A typist can finish function X"	
+\begin{enumerate}
+	\item \textbf{要求的屏幕格式}:
+		PC客户端支持大于$800 \times 600$ 分辨率的屏幕，并对根据屏幕大小以及系统
+		设定的屏幕元素放大比例做自动适应；
+	\item \textbf{使用方式}:
+		对于一般的用户，我们的产品使用逻辑与一般的PC软件一致，
+			用户不需要主动学习便可学会使用它，
+		同时，我们也会在安装后附上使用说明书，来保证用户可以方便使用；
+	\item \textbf{页面规划}:  
+	\begin{itemize}
+		\item 主页界面的用户接口设计，请参考图\ref{fig:desttop_home}；
+		\item 音乐播放界面的用户接口设计，请参考图\ref{fig:desttop_music}；
+		\item 歌单查看界面的用户接口设计，请参考图\ref{fig:desttop_collection}；
+	\end{itemize}
+\end{enumerate}
 
-这应描述下述内容：
+\begin{figure}[h!]
+  \centering
 
-A. 对每种人机界面，软件所必须支持的特性。例如，如果系统用户通过一个显示终端进行操作，那么应包含下述内容：
-要求的屏幕格式
-页面规划及报告或菜单的内容
-输入和输出的相关时序
-一些组合功能键的用法
+  \includegraphics[width=.95\linewidth]{figures/desttop_home}
 
-B. 与系统用户接口使用相关的所有方面。这可能只是一个简单的关于系统怎样展示给用户而该做什么和不该做什么的列表。例如提供关于长或短错误消息选项。和所有其它需求一样，这些需求也应能被检验，例如，四级打字员经一小时的培训后能在Z分钟内完成功能X，而不是一个打字员能完成功能X。
+  \caption{  \label{fig:desttop_home}
+  		PC客户端主页（Home Page）用户接口设计图
+    }
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+ 
+  \includegraphics[width=.95\linewidth]{figures/desttop_music}
+
+  \caption{ \label{fig:desttop_music}
+  		PC客户端音乐播放界面用户接口设计图
+    }
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+
+  \includegraphics[width=.95\linewidth]{figures/desttop_collection}
+
+  \caption{  \label{fig:desttop_collection}
+  		PC客户端歌单展示用户接口设计图
+    }
+\end{figure}
+
+
+\subsubsection{移动客户端用户接口} % (fold)
+
+\begin{enumerate}
+	\item \textbf{要求的屏幕格式}:
+		移动客户端支持大于$1334 \times 750$ 分辨率的移动设备屏幕，并对根据屏幕大小以及系统
+		设定的屏幕元素放大比例做自动适应；
+	\item \textbf{使用方式}:
+		对于一般的用户，我们的产品使用逻辑与一般的移动设备软件一致，
+			用户不需要主动学习便可学会使用它，
+		同时，我们也会在安装后附上使用说明书，来保证用户可以方便使用；
+	\item \textbf{页面规划}:  
+	\begin{itemize}
+		\item 主页界面的用户接口设计，请参考图\ref{fig:mobile_home}；
+		\item 音乐播放界面的用户接口设计，请参考图\ref{fig:mobile_music}；
+		\item \R{K歌界面的用户接口设计，请参考图\ref{fig:mobile_K}}；
+		\item 歌单查看界面的用户接口设计，请参考图\ref{fig:mobile_collection}；
+	\end{itemize}
+\end{enumerate}
+
+\begin{figure}[h!]
+  \centering
+
+  \includegraphics[width=.33\linewidth]{figures/mobile_home}
+
+  \caption{  \label{fig:mobile_home}
+  		移动客户端主页（Home Page）用户接口设计图
+    }
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+ 
+  \includegraphics[width=.33\linewidth]{figures/mobile_music}
+
+  \caption{ \label{fig:mobile_music}
+  		移动客户端音乐播放界面用户接口设计图
+    }
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+
+  \includegraphics[width=.33\linewidth]{figures/mobile_collection}
+
+  \caption{  \label{fig:mobile_collection}
+  		移动客户端歌单展示用户接口设计图
+    }
+\end{figure}
+
+\R{
+\subsubsection{社交需求界面用户接口} % (fold)
+	\begin{enumerate}
+	\item \textbf{使用方式}:
+		私人空间中，用户的基本信息和两种表现形式。
+		首先是``他/她的歌单''，显示该用户创建的歌单，并可以进行点赞操作。
+		然后是``他/她的动态''，可以展示该用户发出的动态，并可以进行评论和点赞。
+		以上点赞和评论的数量会被显示。
+	\item \textbf{页面规划}:  
+	\begin{itemize}
+		\item 私人空间-歌单界面设计，请参考图\ref{fig:mobile_user1}；
+		\item 私人空间-动态界面设计，请参考图\ref{fig:mobile_user2}；
+	\end{itemize}
+\end{enumerate}
+}
+
+\begin{figure}[h!]
+  \centering
+
+  \includegraphics[width=.37\linewidth]{figures/mobile_user1}
+
+  \caption{  \label{fig:mobile_user1}
+  		\R{移动客户端私人空间-歌单界面用户接口设计图}
+    }
+\end{figure}
+\begin{figure}[h!]
+  \centering
+
+  \includegraphics[width=.37\linewidth]{figures/mobile_user2}
+
+  \caption{  \label{fig:mobile_user2}
+  		\R{移动客户端私人空间-动态界面用户接口设计图}
+    }
+\end{figure}
+\begin{figure}[h!]
+  \centering
+
+  \includegraphics[width=.37\linewidth]{figures/mobile_K}
+
+  \caption{  \label{fig:mobile_K}
+  		\R{移动客户端K歌模式下音乐界面用户接口设计图}
+    }
+\end{figure}
+
+\subsubsection{网页客户端用户接口} % (fold)
+
+\begin{enumerate}
+	\item \textbf{要求的屏幕格式}:
+		网页客户端支持大于$800 \times 600$ 分辨率的通用网页浏览器，
+		并对根据屏幕大小以及浏览器设定的屏素放大比例做自动适应；
+	\item \textbf{使用方式}:
+		对于一般的用户，我们的产品使用逻辑与一般的网页一致，
+			用户不需要主动学习便可学会使用它，
+		同时，我们也会在安装后附上使用说明书，来保证用户可以方便使用；
+	\item \textbf{页面规划}:  
+	\begin{itemize}
+		\item 主页界面的用户接口设计，请参考图\ref{fig:web_home}；
+		\item 音乐播放界面的用户接口设计，请参考图\ref{fig:web_music}；
+		\item 歌单查看界面的用户接口设计，请参考图\ref{fig:web_collection}；
+	\end{itemize}
+\end{enumerate}
+
+\begin{figure}[h!]
+  \centering
+
+  \includegraphics[width=.95\linewidth]{figures/web_home}
+
+  \caption{  \label{fig:web_home}
+  		网页客户端主页（Home Page）用户接口设计图
+    }
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+ 
+  \includegraphics[width=.95\linewidth]{figures/web_music}
+
+  \caption{ \label{fig:web_music}
+  		网页客户端音乐播放界面用户接口设计图
+    }
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+
+  \includegraphics[width=.95\linewidth]{figures/web_collection}
+
+  \caption{  \label{fig:web_collection}
+  		网页客户端歌单展示用户接口设计图
+    }
+\end{figure}
 
 \subsection{软件接口}
-<The interface with other system/modules/projects should be explained in detail. >
 
-详细描述与其他系统 /模块 /项目之间的接口
+\subsubsection{数据库软件产品可选项A} % (fold)
+\begin{itemize}
+	\item \textbf{名字}: 
+		Oracle Database 数据库软件
+	\item \textbf{助记符}: 
+		Oracle Database
+	\item \textbf{版本号}: 
+		12c Release 1
+	\item \textbf{来源}: 
+		软件商提供的安装介质
+	\item \textbf{目的}: 
+		作为储存服务器数据的可选项之一，我们将根据实际情况，
+			最终决定是否使用它，另一选项是PostgreSQL数据库软件。
+	\item \textbf{接口定义}: 
+		包含以下接口: 
+		\begin{enumerate}
+			\item 查询用户 ， ViewUser   ， 接口格式: $\{ UID \}$
+			\item 校验用户 ， CheckUser  ， 接口格式: $\{ UID, LoginInfo \}$
+			\item 注册用户 ， RegisterUser  ， 接口格式: $\{ UID,  PassWord, Email\}$
+			\item 查询音乐 ， ViewMusic  ， 接口格式: $\{ MID \}$
+			\item 检验音乐可访问性 ， AccessMusic ，接口格式:  $\{ MID, UID, LoginInfo \}$ 
+		\end{enumerate}
+\end{itemize}
 
-Describes how to use the other (required) software products. (such as data management system, operation system, or algorithm tools package), and the interfaces to other application systems (such as interfaces between the protocol process system and the database management system )
-For each required software product, following information should be provided:
-A. Name
-B. Mnemonic symbol
-C. Version number
-D. Source
-For each interface, this section should:
-A. Discuss the objective of the required software.
-B. Define the interfaces by content and format of message/function. If the interfaces have been clearly described in other documents, it is not necessary to describe in detail here. But the reference of those documents should be given.
+\subsubsection{数据库软件产品可选项B} % (fold)
+\begin{itemize}
+	\item \textbf{名字}: 
+		PostgreSQL Server
+	\item \textbf{助记符}: 
+		PostgreSQL
+	\item \textbf{版本号}: 
+		10.3
+	\item \textbf{来源}: 
+		包管理器
+	\item \textbf{目的}: 
+		作为储存服务器数据的可选项之一，我们将根据实际情况，
+			最终决定是否使用它，另一选项是Oracle Database数据库软件。
+	\item \textbf{接口定义}: 
+		包含以下接口: 
+		\begin{enumerate}
+			\item 查询用户 ， ViewUser   ， 接口格式: $\{ UID \}$
+			\item 校验用户 ， CheckUser  ， 接口格式: $\{ UID, LoginInfo \}$
+			\item 注册用户 ， RegisterUser  ， 接口格式: $\{ UID,  PassWord, Email\}$
+			\item 查询音乐 ， ViewMusic  ， 接口格式: $\{ MID \}$
+			\item 检验音乐可访问性 ， AccessMusic ，接口格式:  $\{ MID, UID, LoginInfo \}$ 
+		\end{enumerate}
+\end{itemize}
 
-在此应描述如何使用其它（必需的）软件产品（例如，数据管理系统，操作系统，或算法工具包），以及与其它应用系统的接口（例如，协议处理系统和数据库管理系统之间的接口）。
+\subsubsection{HTTP服务器} % (fold)
+\begin{itemize}
+	\item \textbf{名字}: 
+	Nginx
+	\item \textbf{助记符}: 
+	Nginx
+	\item \textbf{版本号}: 
+	1.14.0
+	\item \textbf{来源}: 
+	包管理器
+	\item \textbf{目的}: 
+	提供文件下载和动态网页的换发
+	\item \textbf{接口定义}: 
+	使用nginx的配置文件来定义结构并过滤包，使用80和443端口对公网提供服务
+\end{itemize}
 
-对每个必需的软件产品，应提供下列信息：
-A.	名字
-B.	助记符
-C.	版本号
-D.	来源
+\subsubsection{后端框架} % (fold)
+\begin{itemize}
+	\item \textbf{名字}: 
+	Django
+	\item \textbf{助记符}: 
+	Django
+	\item \textbf{版本号}: 
+	2.0.4
+	\item \textbf{来源}: 
+	包管理器
+	\item \textbf{目的}: 
+	提供RESTful API，运行实际服务
+	\item \textbf{接口定义}: 
+	使用HTTP协议，监听从Nginx转发来的请求
+\end{itemize}
 
-对每个接口，本部分应：
-
-A .	讨论与本软件产品相关的接口软件的目的。
-
-B.	按消息/函数内容和格式定义接口。如果接口已在其它文档中很清楚地描述，就没有必要在这儿进行详细描述，但需说明应参考的文档。
+\subsubsection{音频解码}
+\begin{itemize}
+	\item \textbf{名字}: 
+	mpg123
+	\item \textbf{助记符}: 
+	mpg123
+	\item \textbf{版本号}: 
+	1.25.10
+	\item \textbf{来源}: 
+	mpg123官网: http://mpg123.org/
+	\item \textbf{目的}: 
+	解码mp3
+	\item \textbf{接口定义}: 
+	使用mpg123接口进行音频解码和输出
+\end{itemize}
 
 \subsection{硬件接口}
-<The interface with other hardware components should be explained in detail. >
 
-详细描述与硬件的接口
+后端服务可以运行在任何32位或64位X86架构的服务器上，要求服务器有互联网接入，32GB以上的磁盘存储空间。
 
-Describes the logical features of the interface between the software and hardware components, including the equipment supported and how the equipment and protocol is supported. 
+客户端软件要求运行在有互联网接入，有声卡的任何iOS移动设备，Android移动设备，MacOS、Windows、Linux个人计算机设备上。
 
-Defines the interfaces according to the content and format of the software/hardware protocol. If the interfaces have been clearly described in other documents, it is not necessary to describe in detail here. But the reference of those documents should be given.
-
-在此描述软件产品和系统硬件组件之间接口的逻辑特征，也包括支持哪些设备、怎样支持这些设备和协议等。
- 
-按软/硬件协议内容和格式定义接口。如果接口已在其它文档中很清楚地描述，就没有必要在这儿进行详细描述，但需说明应参考的文档。
 
 \subsection{通讯接口}
-<This should specify the various interfaces to communications such as local network protocols, etc.>
 
-详细描述通讯接口，如本地网络协议等。
+使用HTTP1.0/HTTP1.1/HTTPS协议在前端和后端之间进行交互。API使用了RESTful API，利用JSON进行数据交换。
 
-Defines the interfaces according to the content and format of the message/function. If the interfaces have been clearly described in other documents, it is not necessary to describe in detail here. But the reference of those documents should be given.
+JSON所支持的数据类型如下: 
+\begin{itemize}
+	\item \textbf{String}: 字符串
+	\item \textbf{Number}: 整数或浮点数
+	\item \textbf{Boolean}: 布尔类型
+	\item \textbf{Array}: 数组类型
+\end{itemize}
 
-按消息/函数内容和格式定义接口。如果接口已在其它文档中很清楚地描述，就没有必要在这儿进行详细描述，但需说明应参考的文档。
+数据标记含义如下:
+\begin{itemize}
+	\item *必填
+	\item !只读
+	\item ?可选
+\end{itemize}
+
+定义扩展数据类型有: 
+\begin{itemize}
+	\item \textbf{DateTime}: ISO-8601字符串，零时区。如 “2017-07-17T07:12:29.181605Z”
+	\item \textbf{URL}: 统一资源链接，即字符串
+	\item \textbf{Email}: 邮箱名，即字符串
+	\item \textbf{Phone}: 电话号码，即字符串
+	\item \textbf{User}: 用户信息
+\begin{lstlisting}[numbers=none, frame=none]
+{
+    id!: Number,
+    last_login!: DateTime | null,
+    username!: String,
+    phone_number: Phone,
+    email: Email,
+    description: String,
+    avatar_url!: URL,
+    address: String,
+    description: String
+}
+\end{lstlisting}
+	\item \textbf{Notice}: 通知
+\begin{lstlisting}[numbers=none, frame=none]
+{
+    id!: Number,
+    category!: String,
+  	message!: String,
+  	has_read: Boolean,
+  	created!: DateTime
+}
+\end{lstlisting}
+	\item \textbf{File}: 文件
+\begin{lstlisting}[numbers=none, frame=none]
+{
+    id!: Number,
+    file: URL,
+    mime_type: String
+}
+\end{lstlisting}
+\item \textbf{MusicQuality}: 音乐质量，可能有四个值:'128kbps'、'192kbps'、'320kbps'
+\item \textbf{MusicInfo}: 音乐信息
+\begin{lstlisting}[numbers=none, frame=none]
+{
+    name!: String,
+    author!: String,
+    upload_time?: DateTime,
+    album_name?: String,
+    music_id!: String,
+}
+\end{lstlisting}
+\item \textbf{MusicFileInfo}: 音乐文件信息
+\begin{lstlisting}[numbers=none, frame=none]
+{
+    quality!: MusicQuality,
+    resource_url!: URL
+}
+\end{lstlisting}
+\end{itemize}
+
+
+\subsubsection{POST /api/users/username\_login/}
+
+\noindent
+功能: 用户使用用户名登录\\
+请求:
+\begin{lstlisting}[numbers=none, frame=none]
+{
+    username*: String,
+    password*: String,
+}
+\end{lstlisting}
+返回:
+\begin{itemize}
+	\item 成功:  200 -> String = 'OK'
+	\item 失败:  403 -> String // 理由
+\end{itemize}
+
+\subsubsection{POST /api/users/phone\_login/}
+
+\noindent
+功能: 用户使用用户名登录\\
+请求:
+\begin{lstlisting}[numbers=none, frame=none]
+{
+   phone*: Phone,
+   password*: String,
+}
+\end{lstlisting}
+返回:
+\begin{itemize}
+	\item 成功:  200 -> String = 'OK'
+	\item 失败:  403 -> String // 理由
+\end{itemize}
+
+\subsubsection{GET /api/users/logout/}
+
+\noindent
+功能: 登出\\
+返回:
+\begin{itemize}
+	\item 成功:  200 -> String = 'OK'
+	\item 失败:  403 -> String // 理由
+\end{itemize}
+
+
+\subsubsection{GET /api/users/:id/}
+
+\noindent
+功能: 获得:id所指示用户的信息\\
+返回:
+\begin{itemize}
+	\item 成功:  200 -> User
+	\item 未登录:  403 -> String = 'not logged'
+	\item 不存在:  404
+\end{itemize}
+
+
+
+\subsubsection{POST /api/users/upload\_avatar/}
+
+\noindent
+功能: 上传头像\\
+请求: 
+\begin{lstlisting}[numbers=none, frame=none]
+{
+    file*: File
+}
+\end{lstlisting}
+返回:
+\begin{itemize}
+	\item 成功:  200 -> String :头像的URL
+	\item 未登录:  403 -> String = 'not logged'
+	\item 无文件: 400
+\end{itemize}
+
+
+\subsubsection{POST /api/users/change\_password/}
+
+\noindent
+功能: 更改密码\\
+请求: 
+\begin{lstlisting}[numbers=none, frame=none]
+{
+    old_pwd*: String,
+    new_pwd1*: String,
+    new_pwd2*: String
+}
+\end{lstlisting}
+返回:
+\begin{itemize}
+	\item 成功:  200 -> String = 'OK'
+	\item 未登录:  403 -> String = 'not logged'
+\end{itemize}
+
+\subsubsection{GET /api/users/reset\_password\_mail/}
+
+\noindent
+功能: 向邮件发送重置链接用于重置密码\\
+返回:
+\begin{itemize}
+	\item 成功:  200 -> String = 'OK'
+	\item 请求过于频繁:  429
+	\item 邮件发送失败:  500
+\end{itemize}
+
+
+\subsubsection{GET /api/users/reset\_password\_phone/}
+
+\noindent
+功能: 向手机发送验证号码用于重置密码\\
+参数: phone\_number: String\\
+返回:
+\begin{itemize}
+\item 成功:  200 -> String = 'OK'
+\item 请求过于频繁:  429
+\item 短信发送失败:  500
+\end{itemize}
+
+
+
+\subsubsection{GET /api/users/me/}
+
+\noindent
+功能: 获得当前登录用户的信息\\
+参数: 无\\
+返回:
+\begin{itemize}
+	\item 成功:  200 -> User
+	\item 未登录:  403 -> String = 'not logged'
+\end{itemize}
+
+
+\subsubsection{GET /api/search/music/:name}
+
+\noindent
+功能: 对音乐名字进行搜索\\
+参数: 无\\
+返回:
+\begin{itemize}
+	\item 成功:  200 -> List<MusicInfo>
+	\item 未登录:  403 -> String = 'not logged'
+\end{itemize}
+
+\R{
+	\subsubsection{GET /api/music\_recommend/}
+	\noindent
+	功能: 获得音乐文件信息\\
+	参数: 无\\
+	返回:
+	\begin{itemize}
+		\item 成功:  200 -> MusicFileInfo
+		\item 未登录:  403 -> String = 'not logged in'
+	\end{itemize}
+}
+
+\subsubsection{GET /api/music/}
+
+\noindent
+功能: 获得音乐文件信息\\
+查询参数: qulity: MusicQuality, music\_id: String
+返回:
+\begin{itemize}
+	\item 成功:  200 -> MusicFileInfo
+	\item 未付费:  403 -> String = 'Need to buy'
+	\item 未登录:  403 -> String = 'not logged'
+\end{itemize}
+
+
+\subsubsection{GET /api/users/add\_to\_list/}
+
+\noindent
+功能: 将目标歌曲加入收听列表
+查询参数:  music\_id: String, list\_id: String
+返回:
+\begin{itemize}
+	\item 成功:  200 -> String = 'OK'
+	\item 未付费:  403 -> String = 'Need to buy'
+	\item 未登录:  403 -> String = 'not logged'
+\end{itemize}
+
+
+\subsubsection{GET /api/users/delete\_from\_list/}
+
+\noindent
+功能: 将目标歌曲加入收听列表
+查询参数:  music\_id: String, list\_id: String
+返回:
+\begin{itemize}
+	\item 成功:  200 -> String = 'OK'
+	\item 不存在歌曲:  403 -> String = 'music not found'
+	\item 未登录:  403 -> String = 'not logged'
+\end{itemize}
+
+\R{
+	\subsubsection{POST /api/music/:id/comment/}
+	\noindent
+	功能: 评论一个歌曲\\
+	参数: id: String，content: String\\
+	返回:
+	\begin{itemize}
+	\item 成功:  200 -> String = 'OK'
+	\item 不存在歌曲:  403 -> String = 'song not found'
+	\item 未登录:  403 -> String = 'not logged in'
+	\end{itemize}
+}
+
+\R{
+	\subsubsection{POST /api/music/:id/delete\_comment/}
+	\noindent
+	功能: 删除一个评论\\
+	参数: id: String\\
+	返回:
+	\begin{itemize}
+	\item 成功:  200 -> String = 'OK'
+	\item 不存在评论:  403 -> String = 'comment not found'
+	\item 未登录:  403 -> String = 'not logged in'
+	\end{itemize}
+}
+
+\R{
+	\subsubsection{GET /api/friend/add/}
+	\noindent
+	功能:添加好友\\
+	参数: user\_id: String\\
+	返回:
+	\begin{itemize}
+		\item 成功:  200 -> String = 'ok'
+		\item 未登录:  403 -> String = 'not logged in'
+		\item 已添加:  403 -> String = 'already friends'
+	\end{itemize}
+}
+
+\R{
+	\subsubsection{GET /api/friend/delete/}
+	\noindent
+	功能: 删除好友\\
+	参数: user\_id: String\\
+	返回:
+	\begin{itemize}
+		\item 成功:  200 -> String = 'ok'
+	\item 未登录:  403 -> String = 'not logged in'
+	\item 未添加:  403 -> String = 'not friends'
+	\end{itemize}
+}
+
+\R{
+	\subsubsection{POST /api/share/self}
+	\noindent
+	功能: 发布分享\\
+	参数: content: String\\
+	返回:
+	\begin{itemize}
+		\item 成功:  200 -> String = 'ok'
+		\item 未登录:  403 -> String = 'not logged in'
+	\end{itemize}
+}
+
+\R{
+	\subsubsection{GET /api/share/delete/}
+	\noindent
+	功能: 删除分享\\
+	参数: share\_id: String\\
+返回:
+\begin{itemize}
+	\item 成功:  200 -> String = 'ok'
+	\item 未登录:  403 -> String = 'not logged in'
+\end{itemize}
+}
+
+\R{
+	\subsubsection{GET /api/share/thumb/}
+	\noindent
+	功能: 点赞分享\\
+	参数: share\_id: String\\
+	返回:
+	\begin{itemize}
+		\item 成功:  200 -> String = 'ok'
+		\item 未登录:  403 -> String = 'not logged in'
+	\end{itemize}
+}
+
+\R{
+	\subsubsection{GET /api/share/unthumb/}
+	\noindent
+	功能: 取消点赞分享\\
+	参数: share\_id: String\\
+	返回:
+	\begin{itemize}
+		\item 成功:  200 -> String = 'ok'
+		\item 未登录:  403 -> String = 'not logged in'
+	\end{itemize}
+}
+
+\R{
+	\subsubsection{POST /api/share/comment}
+	\noindent
+	功能: 发布分享的评论\\
+	参数: shared\_id: String, content: String\\
+	返回:
+	\begin{itemize}
+		\item 成功:  200 -> String = 'ok'
+		\item 未登录:  403 -> String = 'not logged in'
+	\end{itemize}
+}
