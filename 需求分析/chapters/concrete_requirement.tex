@@ -18,12 +18,12 @@
 	\end{itemize}
 \subsubsection{输入}
 	\begin{itemize}
-		\item \textbf{输入来源}：客户端所在操作系统或浏览器；
+		\item \textbf{输入来源}：客户端所在操作系统或浏览器;
 		\item \textbf{内容}：用户打开了客户端或网页;
 		\item \textbf{有效输入范围}：输入必须合法;
 	\end{itemize}
 \begin{enumerate}
-\item 检测输入是否合法。对于客户端，检查请求来源和格式是否符合要求；对于网页客户端，检测 HTTP 报文是否合法；
+\item 检测输入是否合法。对于客户端，检查请求来源和格式是否符合要求;对于网页客户端，检测 HTTP 报文是否合法;
 \item 检查更新(R.NETHARD.SYS.003);
 \item 主页初始化(R.NETHARD.APP.001);
 \item 自动登录(R.NETHARD.USER.001);
@@ -38,8 +38,8 @@
 \subsubsection{输出}
 \subsubsection{处理}
 \begin{itemize}
-	\item \textbf{输出位置}：响应操作系统或浏览器的请求；
-	\item \textbf{内容}：通过响应内包含的信息，告知启动初始化完成；
+	\item \textbf{输出位置}：响应操作系统或浏览器的请求;
+	\item \textbf{内容}：通过响应内包含的信息，告知启动初始化完成;
 	\item \textbf{有效输出范围}：响应的标准格式(如 HTTP 报文);
 	\item \textbf{错误消息}：返回在异常处理中生成的错误信息;
 \end{itemize}
@@ -49,9 +49,9 @@
 \subsubsection{介绍}
 客户端关闭包括以下步骤:
 	\begin{itemize}
-		\item 检查是否有下载任务，若有，询问用户是否仍要退出；
+		\item 检查是否有下载任务，若有，询问用户是否仍要退出;
 		\item 暂停所有下载;
-		\item 向云端同步歌单(R.CLOUDMUSIC.SYNC.001)；
+		\item 向云端同步歌单(R.CLOUDMUSIC.SYNC.001);
 		\item 关闭程序;
 	\end{itemize}
 \subsubsection{输入}
@@ -95,7 +95,7 @@
 	\begin{itemize}
 		\item \textbf{输入来源}：客户端;
 		\item \textbf{内容}：手动升级或自动升级请求;
-		\item \textbf{有效输入范围}：需判定为合法的请求；
+		\item \textbf{有效输入范围}：需判定为合法的请求;
 	\end{itemize}
 \subsubsection{处理}
 	\begin{enumerate}
@@ -110,8 +110,8 @@
 	\noindent 异常处理：
 	\begin{enumerate}
 		\item \textbf{网络错误}：告知用户更新失败，询问是否重试，
-			若用户选择重试，则重试，否则，放弃更新，启动旧版本；
-		\item \textbf{校验错误}：同\textbf{网络错误}的处理方式；
+			若用户选择重试，则重试，否则，放弃更新，启动旧版本;
+		\item \textbf{校验错误}：同\textbf{网络错误}的处理方式;
 	\end{enumerate}
 \subsubsection{输出}
 \begin{itemize}
@@ -198,7 +198,7 @@
 	\end{enumerate}
 \subsubsection{输出}
 \begin{itemize}
-	\item \textbf{输出位置}：客户端或网页浏览器；
+	\item \textbf{输出位置}：客户端或网页浏览器;
 	\item \textbf{内容}：若成功，返回成功信息，若失败，返回注册失败的原因;
 	\item \textbf{有效输出范围}：无限制;
 	\item \textbf{错误消息}：返回错误信息，告知用户注册失败的原因，并按照情况处理;
@@ -256,8 +256,8 @@
 	\end{enumerate}
 \subsubsection{输出}
 \begin{itemize}
-	\item \textbf{输出位置}：客户端或网页浏览器；
-	\item \textbf{内容}：告知生成完成；
+	\item \textbf{输出位置}：客户端或网页浏览器;
+	\item \textbf{内容}：告知生成完成;
 	\item \textbf{有效输出范围}：无限制
 	\item \textbf{错误消息}：不会产生异常，否则，程序崩溃并产生崩溃日志;
 \end{itemize}
@@ -277,7 +277,7 @@
 	\end{itemize}
 \subsubsection{处理}
 	\begin{enumerate}
-		\item 检测输入有效性，检测请求来源和格式是否符合标准；
+		\item 检测输入有效性，检测请求来源和格式是否符合标准;
 		\item 检测登陆凭据，若校验失败或登录超时，抛出相应异常;
 		\item 检查歌单ID是否存在，若不存在，抛出相应异常;
 		\item 检查歌单的可访问性，若为非公开的，则检查登录凭证对应的用户是否有读取权限，若否，抛出相应异常;
@@ -293,9 +293,9 @@
 \subsubsection{输出}
 \begin{itemize}
 	\item \textbf{输出位置}：客户端或网页浏览器;
-	\item \textbf{内容}：若成功，返回 歌单界面生成完成的信息 ，若失败，返回 失败的原因；
+	\item \textbf{内容}：若成功，返回 歌单界面生成完成的信息 ，若失败，返回 失败的原因;
 	\item \textbf{有效输出范围}：无限制;
-	\item \textbf{错误消息}：返回错误信息，告知用户查看失败的原因，并按照情况处理；
+	\item \textbf{错误消息}：返回错误信息，告知用户查看失败的原因，并按照情况处理;
 \end{itemize}
 
 \subsection{R.CLOUDMUSIC.APP.003生成歌曲播放界面}
@@ -303,19 +303,19 @@
 生成歌曲播放界面的步骤:
 	\begin{itemize}
 		\item 判断歌曲是否有读取权限;
-		\item 生成歌曲播放界面的内容；
+		\item 生成歌曲播放界面的内容;
 	\end{itemize}
 \subsubsection{输入}
 	\begin{itemize}
-		\item \textbf{输入来源}：客户端或网页浏览器；
+		\item \textbf{输入来源}：客户端或网页浏览器;
 		\item \textbf{内容}：请求的音乐ID以及用户登录凭证;
-		\item \textbf{有效输入范围}：需判定为合法的请求；
+		\item \textbf{有效输入范围}：需判定为合法的请求;
 	\end{itemize}
 \subsubsection{处理}
 	\begin{enumerate}
-		\item 检测输入有效性，检测请求来源和格式是否符合标准；
-		\item 检测登陆凭据，若校验失败或登录超时，返回对应错误，不进入下一步；
-		\item 检查歌曲ID是否存在，若不存在，返回对应错误，不进入下一步；
+		\item 检测输入有效性，检测请求来源和格式是否符合标准;
+		\item 检测登陆凭据，若校验失败或登录超时，返回对应错误，不进入下一步;
+		\item 检查歌曲ID是否存在，若不存在，返回对应错误，不进入下一步;
 		\item 检查歌曲的可访问性，若为付费的音乐，检查用户凭证对应的账户是否对其有播放权，
 			若否或没有登录，返回错误信息;
 		\item 若具有播放权，生成完整播放界面;
@@ -324,15 +324,15 @@
 	\noindent 异常处理：
 	\begin{enumerate}
 		\item \textbf{登录信息失败}：返回登陆信息失效，客户端将请求用户重新手动登陆;
-		\item \textbf{歌曲ID不存在}：返回歌曲不存在，客户端将展示错误页面；
-		\item \textbf{歌曲不可访问}：返回歌曲无法访问，客户端询问是否要购买；
+		\item \textbf{歌曲ID不存在}：返回歌曲不存在，客户端将展示错误页面;
+		\item \textbf{歌曲不可访问}：返回歌曲无法访问，客户端询问是否要购买;
 	\end{enumerate}
 \subsubsection{输出}
 \begin{itemize}
-	\item \textbf{输出位置}：客户端或网页浏览器；
+	\item \textbf{输出位置}：客户端或网页浏览器;
 	\item \textbf{内容}：若成功，返回音乐播放界面生成完成的信息; 若失败，返回错误信息;
 	\item \textbf{有效输出范围}：无限制;
-	\item \textbf{错误消息}：返回错误信息，告知用户尝试进入播放界面失败的原因，并按照情况处理；
+	\item \textbf{错误消息}：返回错误信息，告知用户尝试进入播放界面失败的原因，并按照情况处理;
 \end{itemize}
 
 \subsection{R.CLOUDMUSIC.APP.004生成歌曲推荐界面}
@@ -350,7 +350,7 @@
 	\end{itemize}
 \subsubsection{处理}
 	\begin{enumerate}
-		\item 检测输入有效性，检测请求来源和格式是否符合标准；
+		\item 检测输入有效性，检测请求来源和格式是否符合标准;
 		\item 检测登陆凭据，若校验失败或登录超时，抛出相应异常;
 		\item 检测是否登录，若登录，则从服务器获取个性化推荐信息
 			\\(详见R.CLOUDMUSIC.RECOMMEND.001);
@@ -375,32 +375,32 @@
 \subsubsection{介绍}
 	生成账户界面步骤如下: 
 	\begin{itemize}
-		\item 判定用户的登录状态；
-		\item 生成对应的账户界面的内容；
+		\item 判定用户的登录状态;
+		\item 生成对应的账户界面的内容;
 	\end{itemize}
 \subsubsection{输入}
 	\begin{itemize}
-		\item \textbf{输入来源}: 客户端或网页浏览器；
+		\item \textbf{输入来源}: 客户端或网页浏览器;
 		\item \textbf{内容}: 请求的来源以及用户登录凭证;
-		\item \textbf{有效输入范围}: 需判定为合法的请求；
+		\item \textbf{有效输入范围}: 需判定为合法的请求;
 	\end{itemize}
 \subsubsection{处理}
 	\begin{enumerate}
-		\item 检测输入有效性，检测请求来源和格式是否符合标准；
+		\item 检测输入有效性，检测请求来源和格式是否符合标准;
 		\item 若没有登陆，生成登陆界面;
 		\item 检测登陆凭据，若校验失败或登录超时，抛出相应异常;
-		\item 向服务器请求用户的数据；
+		\item 向服务器请求用户的数据;
 		\item 生成用户的界面信息;
-		\item 返回完成的信息；
+		\item 返回完成的信息;
 	\end{enumerate}
 	\noindent 异常处理: 
 	\begin{enumerate}
-		\item \textbf{登录信息失败}: 返回登陆失败，客户端请求用户重新登陆；
-		\item \textbf{网络访问}: 返回网络错误，客户端请求用户检查网络状态；
+		\item \textbf{登录信息失败}: 返回登陆失败，客户端请求用户重新登陆;
+		\item \textbf{网络访问}: 返回网络错误，客户端请求用户检查网络状态;
 	\end{enumerate}
 \subsubsection{输出}
 \begin{itemize}
-	\item \textbf{输出位置}: 客户端或网页浏览器；
+	\item \textbf{输出位置}: 客户端或网页浏览器;
 	\item \textbf{内容}: 若成功，返回账户界面生成完成; 若失败，返回错误信息;
 	\item \textbf{有效输出范围}: 无限制;
 	\item \textbf{错误消息}: 返回错误信息，告知用户进入账户界面失败的原因;
@@ -409,24 +409,24 @@
 \subsubsection{介绍}
 	这是在 生成设置界面 时，我们需要处理的功能点，包括: 
 	\begin{itemize}
-		\item 生成设置界面的内容；
+		\item 生成设置界面的内容;
 	\end{itemize}
 \subsubsection{输入}
 	\begin{itemize}
-		\item \textbf{输入来源}: 客户端或网页浏览器；
-		\item \textbf{内容}: 请求的来源；
-		\item \textbf{有效输入范围}: 需判定为合法的请求；
+		\item \textbf{输入来源}: 客户端或网页浏览器;
+		\item \textbf{内容}: 请求的来源;
+		\item \textbf{有效输入范围}: 需判定为合法的请求;
 	\end{itemize}
 \subsubsection{处理}
 	\begin{enumerate}
-		\item 检测输入有效性，检测请求来源和格式是否符合标准；
-		\item 读取当前的用户设置信息；
-		\item 生成设置界面；
-		\item 返回完成的信息；
+		\item 检测输入有效性，检测请求来源和格式是否符合标准;
+		\item 读取当前的用户设置信息;
+		\item 生成设置界面;
+		\item 返回完成的信息;
 	\end{enumerate}
 \subsubsection{输出}
 \begin{itemize}
-	\item \textbf{输出位置}: 客户端或网页浏览器；
+	\item \textbf{输出位置}: 客户端或网页浏览器;
 	\item \textbf{内容}: 若成功，返回设置界面生成完成; 若失败，程序崩溃;
 	\item \textbf{有效输出范围}: 无限制;
 	\item \textbf{错误消息}: 无错误信息;
@@ -435,12 +435,12 @@
 \subsubsection{介绍}
 	音乐播放步骤: 
 	\begin{itemize}
-		\item 响应控制请求；
-		\item 处理播放请求；
+		\item 响应控制请求;
+		\item 处理播放请求;
 	\end{itemize}
 \subsubsection{输入}
 	\begin{itemize}
-		\item \textbf{输入来源}: 客户端或网页浏览器；
+		\item \textbf{输入来源}: 客户端或网页浏览器;
 		\item \textbf{内容}: 对音乐的控制请求，可能有以下具体需求: 
 		\begin{enumerate}
 			\item 播放/暂停状态转换;
@@ -458,16 +458,16 @@
 	\end{itemize}
 \subsubsection{处理}
 	\begin{enumerate}
-		\item 检测输入有效性，检测请求来源和格式是否符合标准；
+		\item 检测输入有效性，检测请求来源和格式是否符合标准;
 		\item 对于输入的控制分别做处理: 
 		\begin{enumerate}
 			\item \textbf{播放/暂停状态转换}: 
-				转换歌曲的播放或暂停状态；
+				转换歌曲的播放或暂停状态;
 			\item \textbf{下一曲/上一曲}: 
-				根据播放列表和列表播放模式，操作播放的音乐；
+				根据播放列表和列表播放模式，操作播放的音乐;
 			\item \textbf{进度条控制，需提供目标时间戳}: 
 				首先判断时间戳输入的合法性,
-				然后跳转至该时间戳；
+				然后跳转至该时间戳;
 			\item \textbf{播放的歌曲的跳转，需提供音乐ID}: 
 				首先判断ID输入的合法性,
 				然后跳转至该时间戳;
@@ -486,7 +486,7 @@
 	\end{enumerate}
 \subsubsection{输出}
 \begin{itemize}
-	\item \textbf{输出位置}: 客户端或网页浏览器；
+	\item \textbf{输出位置}: 客户端或网页浏览器;
 	\item \textbf{内容}: 若成功，返回操作完成; 若失败，程序崩溃;
 	\item \textbf{有效输出范围}: 无限制;
 	\item \textbf{错误消息}: 无错误信息;
@@ -496,12 +496,12 @@
 \subsubsection{介绍}
 	音乐串流步骤
 	\begin{itemize}
-		\item 连接服务器，验证串流可访问性；
-		\item 处理音乐的串流需求；
+		\item 连接服务器，验证串流可访问性;
+		\item 处理音乐的串流需求;
 	\end{itemize}
 \subsubsection{输入}
 	\begin{itemize}
-		\item \textbf{输入来源}: 客户端或网页浏览器；
+		\item \textbf{输入来源}: 客户端或网页浏览器;
 		\item \textbf{内容}: 对音乐的串流请求，包括: 
 		\begin{enumerate}
 			\item 串流音乐的ID;
@@ -511,9 +511,9 @@
 		\end{enumerate}
 		\item \textbf{有效输入范围}: 需要判断请求的合法性，具体如下: 
 		\begin{itemize}
-			\item 若有用户登陆凭据，需对其校验； 
-			\item 需要判断ID的合法性，以及是否有访问权；
-			\item 需判断时间戳的合法性； 
+			\item 若有用户登陆凭据，需对其校验; 
+			\item 需要判断ID的合法性，以及是否有访问权;
+			\item 需判断时间戳的合法性; 
 		\end{itemize}
 	\end{itemize}
 \subsubsection{处理}
@@ -527,7 +527,7 @@
 	\end{enumerate}
 \subsubsection{输出}
 \begin{itemize}
-	\item \textbf{输出位置}: 客户端或网页浏览器；
+	\item \textbf{输出位置}: 客户端或网页浏览器;
 	\item \textbf{内容}: 若成功，返回对应的串流; 若失败，返回错误信息;
 	\item \textbf{有效输出范围}: 无限制;
 	\item \textbf{错误消息}: 按照系统响应请求的方式或者网络服务发出响应报文的
@@ -538,12 +538,12 @@
 \subsubsection{介绍}
 	音乐下载步骤:
 	\begin{itemize}
-		\item 连接服务器，验证音乐是否可下载；
-		\item 处理音乐的下载请求；
+		\item 连接服务器，验证音乐是否可下载;
+		\item 处理音乐的下载请求;
 	\end{itemize}
 \subsubsection{输入}
 	\begin{itemize}
-		\item \textbf{输入来源}: 客户端或网页浏览器；
+		\item \textbf{输入来源}: 客户端或网页浏览器;
 		\item \textbf{内容}: 对音乐的下载请求，包括: 
 		\begin{enumerate}
 			\item 下载音乐的ID;
@@ -552,27 +552,27 @@
 		\end{enumerate}
 		\item \textbf{有效输入范围}: 需要判断请求的合法性，具体如下: 
 		\begin{itemize}
-			\item 若有用户登陆凭据，需对其校验； 
+			\item 若有用户登陆凭据，需对其校验; 
 			\item 判断歌曲ID的合法性;
-			\item 判断用户对其是否有访问权；
+			\item 判断用户对其是否有访问权;
 		\end{itemize}
 	\end{itemize}
 \subsubsection{处理}
 	\begin{enumerate}
-		\item 检测输入有效性，检测请求来源和格式是否符合标准；
-		\item 若有用户登陆凭据，验证其合法性；
+		\item 检测输入有效性，检测请求来源和格式是否符合标准;
+		\item 若有用户登陆凭据，验证其合法性;
 		\item 检查音乐ID的合法性;
 		\item 检查是否对当前的账户可下载;
-		\item 检查音质选项的合法性，若没有音质选项，使用默认设置；
+		\item 检查音质选项的合法性，若没有音质选项，使用默认设置;
 		\item 返回对应的下载响应，建立下载连接;
 	\end{enumerate}
 \subsubsection{输出}
 \begin{itemize}
-	\item \textbf{输出位置}: 客户端或网页浏览器；
+	\item \textbf{输出位置}: 客户端或网页浏览器;
 	\item \textbf{内容}: 若成功，返回对应的下载响应; 若失败，返回错误信息;
 	\item \textbf{有效输出范围}: 无限制;
 	\item \textbf{错误消息}: 按照系统响应请求的方式或者网络服务发出响应报文的
-		正确格式决定相关输出；
+		正确格式决定相关输出;
 \end{itemize}
 
 \subsection{R.CLOUDMUSIC.SHOP.001购买音乐}
@@ -581,11 +581,11 @@
 	\begin{itemize}
 		\item 连接服务器，获取音乐的价格;
 		\item 验证支付信息;
-		\item 在数据库中修改账户的音乐访问权；
+		\item 在数据库中修改账户的音乐访问权;
 	\end{itemize}
 \subsubsection{输入}
 	\begin{itemize}
-		\item \textbf{输入来源}: 客户端或网页浏览器；
+		\item \textbf{输入来源}: 客户端或网页浏览器;
 		\item \textbf{内容}: 对音乐的购买请求，包括: 
 		\begin{enumerate}
 			\item 购买音乐的ID的集合;
@@ -600,155 +600,155 @@
 	\end{itemize}
 \subsubsection{处理}
 	\begin{enumerate}
-		\item 检测输入有效性，检测请求来源和格式是否符合标准；
-		\item 若有用户登陆凭据，验证其合法性；
-		\item 检查音乐ID的合法性，和是否已经在当前账户的已购买数据库中；
+		\item 检测输入有效性，检测请求来源和格式是否符合标准;
+		\item 若有用户登陆凭据，验证其合法性;
+		\item 检查音乐ID的合法性，和是否已经在当前账户的已购买数据库中;
 		\item 检查支付凭据的真伪;
 		\item 在数据库中修改账户的音乐访问权;
 		\item 返回对应的购买成功响应，询问用户是否开始下载对应音乐;
 	\end{enumerate}
 	\noindent 异常处理: 
 	\begin{enumerate}
-		\item \textbf{登录信息失败}: 返回登陆失败错误的信息，客户端请求用户重新登陆；
-		\item \textbf{网络访问}: 返回网络错误的信息，客户端请求用户检查网络状态；
+		\item \textbf{登录信息失败}: 返回登陆失败错误的信息，客户端请求用户重新登陆;
+		\item \textbf{网络访问}: 返回网络错误的信息，客户端请求用户检查网络状态;
 	\end{enumerate}
 \subsubsection{输出}
 \begin{itemize}
-	\item \textbf{输出位置}: 客户端或网页浏览器；
-	\item \textbf{内容}: 若成功，返回对应的成功响应; 若失败，返回错误信息；
+	\item \textbf{输出位置}: 客户端或网页浏览器;
+	\item \textbf{内容}: 若成功，返回对应的成功响应; 若失败，返回错误信息;
 	\item \textbf{有效输出范围}: 无限制;
 	\item \textbf{错误消息}: 按照系统响应请求的方式或者网络服务发出响应报文的
-		正确格式决定相关输出；
+		正确格式决定相关输出;
 \end{itemize}
 \subsection{R.CLOUDMUSIC.SYNC.001数据同步上传}
 \subsubsection{介绍}
 	处理数据同步上传步骤:
 	\begin{itemize}
-		\item 连接服务器，验证账户登陆凭据；
-		\item 上传数据至服务器；
+		\item 连接服务器，验证账户登陆凭据;
+		\item 上传数据至服务器;
 	\end{itemize}
 \subsubsection{输入}
 	\begin{itemize}
-		\item \textbf{输入来源}: 客户端或网页浏览器；
+		\item \textbf{输入来源}: 客户端或网页浏览器;
 		\item \textbf{内容}: 对数据同步上传请求，包括: 
 		\begin{enumerate}
-			\item 用户登陆凭据；
-			\item 当前时间；
-			\item 变更的摘要；
+			\item 用户登陆凭据;
+			\item 当前时间;
+			\item 变更的摘要;
 		\end{enumerate}
 		\item \textbf{有效输入范围}: 需要判断请求的合法性，具体如下: 
 		\begin{itemize}
-			\item 对于用户登陆凭据，需对其校验； 
-			\item 对于时间，需验证是否为更新的数据； 
+			\item 对于用户登陆凭据，需对其校验; 
+			\item 对于时间，需验证是否为更新的数据; 
 		\end{itemize}
 	\end{itemize}
 \subsubsection{处理}
 	\begin{enumerate}
-		\item 检测输入有效性，检测请求来源和格式是否符合标准；
-		\item 若有用户登陆凭据，验证其合法性；
-		\item 检查服务器中的数据库，检查是否有更新的数据；
-		\item 根据数据变更的摘要，对服务器端做数据接收的准备；
-		\item 建立服务器信道，返回响应，进行用户数据的上传；
+		\item 检测输入有效性，检测请求来源和格式是否符合标准;
+		\item 若有用户登陆凭据，验证其合法性;
+		\item 检查服务器中的数据库，检查是否有更新的数据;
+		\item 根据数据变更的摘要，对服务器端做数据接收的准备;
+		\item 建立服务器信道，返回响应，进行用户数据的上传;
 	\end{enumerate}
 	\noindent 异常处理: 
 	\begin{enumerate}
-		\item \textbf{登录信息失败}: 返回登陆失败错误的信息，客户端将请求用户重登陆；
-		\item \textbf{网络访问}: 返回网络错误的信息，客户端提示用户检查网络状态；
+		\item \textbf{登录信息失败}: 返回登陆失败错误的信息，客户端将请求用户重登陆;
+		\item \textbf{网络访问}: 返回网络错误的信息，客户端提示用户检查网络状态;
 	\end{enumerate}
 \subsubsection{输出}
 \begin{itemize}
-	\item \textbf{输出位置}: 客户端或网页浏览器；
+	\item \textbf{输出位置}: 客户端或网页浏览器;
 	\item \textbf{内容}: 若成功，返回对应的成功响应; 若失败，返回错误信息;
 	\item \textbf{有效输出范围}: 无限制;
 	\item \textbf{错误消息}: 按照系统响应请求的方式或者网络服务发出响应报文的
-		正确格式决定相关输出；
+		正确格式决定相关输出;
 \end{itemize}
 
 \subsection{R.CLOUDMUSIC.SYNC.001数据同步上传}
 \subsubsection{介绍}
 	数据上传步骤：
 	\begin{itemize}
-		\item 连接服务器，验证账户登陆凭据；
-		\item 上传数据至服务器；
+		\item 连接服务器，验证账户登陆凭据;
+		\item 上传数据至服务器;
 	\end{itemize}
 \subsubsection{输入}
 	\begin{itemize}
-		\item \textbf{输入来源}: 客户端或网页浏览器；
+		\item \textbf{输入来源}: 客户端或网页浏览器;
 		\item \textbf{内容}: 对数据同步上传请求，包括: 
 		\begin{enumerate}
-			\item 用户登陆凭据；
-			\item 当前时间；
-			\item 变更的摘要；
+			\item 用户登陆凭据;
+			\item 当前时间;
+			\item 变更的摘要;
 		\end{enumerate}
 		\item \textbf{有效输入范围}: 需要判断请求的合法性，具体如下: 
 		\begin{itemize}
-			\item 对于用户登陆凭据，需对其校验； 
-			\item 对于时间，需验证是否为更新的数据； 
+			\item 对于用户登陆凭据，需对其校验; 
+			\item 对于时间，需验证是否为更新的数据; 
 		\end{itemize}
 	\end{itemize}
 \subsubsection{处理}
 	\begin{enumerate}
-		\item 检测输入有效性，检测请求来源和格式是否符合标准；
-		\item 若有用户登陆凭据，验证其合法性；
-		\item 检查服务器中的数据库，检查是否有更新的数据；
-		\item 根据数据变更的摘要，对服务器端做数据接收的准备；
-		\item 建立服务器信道，返回响应，进行用户数据的上传；
+		\item 检测输入有效性，检测请求来源和格式是否符合标准;
+		\item 若有用户登陆凭据，验证其合法性;
+		\item 检查服务器中的数据库，检查是否有更新的数据;
+		\item 根据数据变更的摘要，对服务器端做数据接收的准备;
+		\item 建立服务器信道，返回响应，进行用户数据的上传;
 	\end{enumerate}
 	\noindent 异常处理: 
 	\begin{enumerate}
-		\item \textbf{登录信息失败}: 返回登陆失败错误的信息，客户端请求用户重新登陆；
-		\item \textbf{网络访问}: 返回网络错误的信息，客户端提示用户检查网络状态；
+		\item \textbf{登录信息失败}: 返回登陆失败错误的信息，客户端请求用户重新登陆;
+		\item \textbf{网络访问}: 返回网络错误的信息，客户端提示用户检查网络状态;
 	\end{enumerate}
 \subsubsection{输出}
 \begin{itemize}
-	\item \textbf{输出位置}: 客户端或网页浏览器；
+	\item \textbf{输出位置}: 客户端或网页浏览器;
 	\item \textbf{内容}: 若成功，返回对应的成功响应; 若失败，返回错误信息;
 	\item \textbf{有效输出范围}: 无限制;
 	\item \textbf{错误消息}: 按照系统响应请求的方式或者网络服务发出响应报文的
-		正确格式决定相关输出；
+		正确格式决定相关输出;
 \end{itemize}
 
 \subsection{R.CLOUDMUSIC.SYNC.002数据同步下载}
 \subsubsection{介绍}
 	数据同步下载:
 	\begin{itemize}
-		\item 连接服务器，验证账户登陆凭据；
-		\item 下载数据至客户端；
+		\item 连接服务器，验证账户登陆凭据;
+		\item 下载数据至客户端;
 	\end{itemize}
 \subsubsection{输入}
 	\begin{itemize}
-		\item \textbf{输入来源}: 客户端；
+		\item \textbf{输入来源}: 客户端;
 		\item \textbf{内容}: 对数据同步下载请求，包括: 
 		\begin{enumerate}
-			\item 用户登陆凭据；
-			\item 请求数据的范围；
+			\item 用户登陆凭据;
+			\item 请求数据的范围;
 		\end{enumerate}
 		\item \textbf{有效输入范围}: 需要判断请求的合法性，具体如下: 
 		\begin{itemize}
-			\item 对于用户登陆凭据，需对其校验； 
-			\item 对于请求数据的范围，需验证是否已在数据库中； 
+			\item 对于用户登陆凭据，需对其校验; 
+			\item 对于请求数据的范围，需验证是否已在数据库中; 
 		\end{itemize}
 	\end{itemize}
 \subsubsection{处理}
 	\begin{enumerate}
-		\item 检测输入有效性，检测请求来源和格式是否符合标准；
-		\item 若有用户登陆凭据，验证其合法性；
-		\item 检查服务器中的数据库，检查是否请求数据的范围内的所有数据；
-		\item 根据请求数据的范围，对服务器端做传输数据的准备；
-		\item 建立服务器信道，返回响应，进行用户数据的下载；
+		\item 检测输入有效性，检测请求来源和格式是否符合标准;
+		\item 若有用户登陆凭据，验证其合法性;
+		\item 检查服务器中的数据库，检查是否请求数据的范围内的所有数据;
+		\item 根据请求数据的范围，对服务器端做传输数据的准备;
+		\item 建立服务器信道，返回响应，进行用户数据的下载;
 	\end{enumerate}
 	\noindent 异常处理: 
 	\begin{enumerate}
-		\item \textbf{登录信息失败}: 返回登陆失败错误的信息，客户端将请求用户重登陆；
-		\item \textbf{网络访问}: 返回网络错误的信息，客户端提示用户检查网络状态；
+		\item \textbf{登录信息失败}: 返回登陆失败错误的信息，客户端将请求用户重登陆;
+		\item \textbf{网络访问}: 返回网络错误的信息，客户端提示用户检查网络状态;
 	\end{enumerate}
 \subsubsection{输出}
 \begin{itemize}
-	\item \textbf{输出位置}: 客户端或网页浏览器；
-	\item \textbf{内容}: 若成功，返回对应的成功响应 ，若失败，返回失败的原因；
+	\item \textbf{输出位置}: 客户端或网页浏览器;
+	\item \textbf{内容}: 若成功，返回对应的成功响应 ，若失败，返回失败的原因;
 	\item \textbf{有效输出范围}: 无限制;
 	\item \textbf{错误消息}: 按照系统响应请求的方式或者网络服务发出响应报文的
-		正确格式决定相关输出；
+		正确格式决定相关输出;
 \end{itemize}
 
 
@@ -756,17 +756,17 @@
 \subsubsection{介绍}
 	处理分享请求步骤:
 	\begin{itemize}
-		\item 连接服务器，验证账户信息、推荐内容信息；
-		\item 生成推荐链接；
+		\item 连接服务器，验证账户信息、推荐内容信息;
+		\item 生成推荐链接;
 	\end{itemize}
 \subsubsection{输入}
 	\begin{itemize}
-		\item \textbf{输入来源}：客户端或网页浏览器；
+		\item \textbf{输入来源}：客户端或网页浏览器;
 		\item \textbf{内容}：对分享链接生成的请求，包括：
 		\begin{enumerate}
 			\item 用户信息(用户名或昵称);
-			\item 推荐内容；
-			\item 用户附加推荐信息；
+			\item 推荐内容;
+			\item 用户附加推荐信息;
 		\end{enumerate}
 		\item \textbf{有效输入范围}：需要判断请求的合法性，具体如下：
 		\begin{itemize}
@@ -775,15 +775,15 @@
 	\end{itemize}
 \subsubsection{处理}
 	\begin{enumerate}
-		\item 检测输入有效性，检测请求来源和格式是否符合标准；
-		\item 若有用户登陆凭据，验证其合法性；
-		\item 检查推荐内容；
-		\item 检查附加推荐信息；
-		\item 生成对应推荐链接；
+		\item 检测输入有效性，检测请求来源和格式是否符合标准;
+		\item 若有用户登陆凭据，验证其合法性;
+		\item 检查推荐内容;
+		\item 检查附加推荐信息;
+		\item 生成对应推荐链接;
 	\end{enumerate}
 \subsubsection{输出}
 \begin{itemize}
-	\item \textbf{输出位置}：客户端或网页浏览器；
+	\item \textbf{输出位置}：客户端或网页浏览器;
 	\item \textbf{内容}：若成功，返回对应的生成链接响应; 若失败，返回错误信息;
 	\item \textbf{有效输出范围}：无限制;
 	\item \textbf{错误消息}：根据错误信息提示用户分享失败的原因;
@@ -793,38 +793,38 @@
 \subsubsection{介绍}
 	处理评价请求步骤：
 	\begin{itemize}
-		\item 连接服务器，验证账户信息；
-		\item 从服务器更新评价信息；
-		\item 若有上传评价请求，上传评价内容到服务器；
-		\item 服务器处理评价内容；
+		\item 连接服务器，验证账户信息;
+		\item 从服务器更新评价信息;
+		\item 若有上传评价请求，上传评价内容到服务器;
+		\item 服务器处理评价内容;
 	\end{itemize}
 \subsubsection{输入}
 	\begin{itemize}
-		\item \textbf{输入来源}：客户端或网页浏览器；
+		\item \textbf{输入来源}：客户端或网页浏览器;
 		\item \textbf{内容}：对评价请求，包括：
 		\begin{enumerate}
-			\item 用户登陆信息；
-			\item 评价内容（可选）；
+			\item 用户登陆信息;
+			\item 评价内容（可选）;
 		\end{enumerate}
 		\item \textbf{有效输入范围}：需要判断请求的合法性，具体如下：
 		\begin{itemize}
-			\item 对于用户信息，需对其校验； 
-			\item 若有上传评价信息，检查评价内容； 
+			\item 对于用户信息，需对其校验; 
+			\item 若有上传评价信息，检查评价内容; 
 		\end{itemize}
 	\end{itemize}
 \subsubsection{处理}
 	\begin{enumerate}
-		\item 检测输入有效性，检测请求来源和格式是否符合标准；
-		\item 检验用户信息，是否为登录状态；
-		\item 若有评价信息上传，检查评价内容，检查是否需要过滤；
-		\item 服务器记录评价上传时间；
-		\item 若所有检查通过，将评价进行处理插入数据库；
-		\item 从数据库中查找相应评价数据返回给客户端；
+		\item 检测输入有效性，检测请求来源和格式是否符合标准;
+		\item 检验用户信息，是否为登录状态;
+		\item 若有评价信息上传，检查评价内容，检查是否需要过滤;
+		\item 服务器记录评价上传时间;
+		\item 若所有检查通过，将评价进行处理插入数据库;
+		\item 从数据库中查找相应评价数据返回给客户端;
 	\end{enumerate}
 \subsubsection{输出}
 \begin{itemize}
-	\item \textbf{输出位置}：客户端或网页浏览器；
-	\item \textbf{内容}：若成功，返回对应的成功响应; 若失败，返回错误信息；
+	\item \textbf{输出位置}：客户端或网页浏览器;
+	\item \textbf{内容}：若成功，返回对应的成功响应; 若失败，返回错误信息;
 	\item \textbf{有效输出范围}：无限制;
 	\item \textbf{错误消息}：根据错误信息提示用户评论失败的原因;
 \end{itemize}
@@ -833,32 +833,32 @@
 \subsubsection{介绍}
 	这是在 处理个性化推荐请求 时，我们需要处理的功能点，包括：
 	\begin{itemize}
-		\item 连接服务器，验证账户信息；
-		\item 从服务器下载数据；
+		\item 连接服务器，验证账户信息;
+		\item 从服务器下载数据;
 	\end{itemize}
 \subsubsection{输入}
 	\begin{itemize}
-		\item \textbf{输入来源}：客户端或网页浏览器；
+		\item \textbf{输入来源}：客户端或网页浏览器;
 		\item \textbf{内容}：对数据同步上传请求，包括：
 		\begin{enumerate}
-			\item 用户信息；
+			\item 用户信息;
 		\end{enumerate}
 		\item \textbf{有效输入范围}：需要判断请求的合法性，具体如下：
 		\begin{itemize}
-			\item 对于用户信息，需对其校验； 
+			\item 对于用户信息，需对其校验; 
 		\end{itemize}
 	\end{itemize}
 \subsubsection{处理}
 	\begin{enumerate}
-		\item 检测输入有效性，检测请求来源和格式是否符合标准；
-		\item 若有用户登陆凭据，验证其合法性，若无按默认推荐处理；
-		\item 从服务器中的数据库中查找对应数据；
-		\item 返回查找到的数据；
+		\item 检测输入有效性，检测请求来源和格式是否符合标准;
+		\item 若有用户登陆凭据，验证其合法性，若无按默认推荐处理;
+		\item 从服务器中的数据库中查找对应数据;
+		\item 返回查找到的数据;
 	\end{enumerate}
 \subsubsection{输出}
 \begin{itemize}
-	\item \textbf{输出位置}：客户端或网页浏览器；
-	\item \textbf{内容}：若成功，返回个性化推荐成功生成; 若失败，返回错误信息；
+	\item \textbf{输出位置}：客户端或网页浏览器;
+	\item \textbf{内容}：若成功，返回个性化推荐成功生成; 若失败，返回错误信息;
 	\item \textbf{有效输出范围}：无限制;
 	\item \textbf{错误消息}：返回错误信息，告知用户查看失败的原因，并按照情况处理;
 \end{itemize}
@@ -867,34 +867,34 @@
 \subsubsection{介绍}
 	这是在 处理排行榜请求 时，我们需要处理的功能点，包括：
 	\begin{itemize}
-		\item 连接服务器，验证账户登陆凭据；
-		\item 从服务器更新排行榜数据；
+		\item 连接服务器，验证账户登陆凭据;
+		\item 从服务器更新排行榜数据;
 	\end{itemize}
 \subsubsection{输入}
 	\begin{itemize}
-		\item \textbf{输入来源}：客户端或网页浏览器；
+		\item \textbf{输入来源}：客户端或网页浏览器;
 		\item \textbf{内容}：对数据同步上传请求，包括：
 		\begin{enumerate}
-			\item 用户登陆凭据（可选）；
-			\item 本地排行榜数据；
+			\item 用户登陆凭据（可选）;
+			\item 本地排行榜数据;
 		\end{enumerate}
 		\item \textbf{有效输入范围}：需要判断请求的合法性，具体如下：
 		\begin{itemize}
-			\item 对于用户登陆凭据，需对其校验； 
-			\item 对于本地排行榜数据，需验证是否为需要更新的数据； 
+			\item 对于用户登陆凭据，需对其校验; 
+			\item 对于本地排行榜数据，需验证是否为需要更新的数据; 
 		\end{itemize}
 	\end{itemize}
 \subsubsection{处理}
 	\begin{enumerate}
-		\item 检测输入有效性，检测请求来源和格式是否符合标准；
-		\item 若有用户登陆凭据，验证其合法性；
-		\item 检查服务器中的数据库，检查排行榜是否需要更新；
-		\item 若需要更新，则返回给客户端最新的排行榜数据，否则告诉客户端无需更新；
+		\item 检测输入有效性，检测请求来源和格式是否符合标准;
+		\item 若有用户登陆凭据，验证其合法性;
+		\item 检查服务器中的数据库，检查排行榜是否需要更新;
+		\item 若需要更新，则返回给客户端最新的排行榜数据，否则告诉客户端无需更新;
 	\end{enumerate}
 \subsubsection{输出}
 \begin{itemize}
-	\item \textbf{输出位置}：客户端或网页浏览器；
-	\item \textbf{内容}：若成功，返回排行榜成功生成; 若失败，返回错误信息；
+	\item \textbf{输出位置}：客户端或网页浏览器;
+	\item \textbf{内容}：若成功，返回排行榜成功生成; 若失败，返回错误信息;
 	\item \textbf{有效输出范围}：无限制;
 	\item \textbf{错误消息}：返回错误信息，告知用户查看失败的原因，并按照情况处理;
 \end{itemize}
@@ -907,7 +907,7 @@
 		以及R.CLOUDMUSIC.MUSIC.001 $\sim$ 003
 		之中的服务器信道建立响应，需要在尽量少的时间内使用户得到
 		响应，对于HTTP连接的响应，一般需要控制在500ms以下，
-		不然会造成用户体验的下降；
+		不然会造成用户体验的下降;
 	\item 对于R.CLOUDMUSIC.SHOP.001 $\sim$ 002中的支付相关的响应需求，
 		由于可能向外部的支付机构查询相关订单的真伪，
 		对于响应的延时，可以放宽要求至3500ms以下，
@@ -919,12 +919,12 @@
 		之中的音乐播放、串流、下载服务，
 		需要以较快的速度进行数据的传输。
 	\item 由于音乐文件一般不大，对于播放、串流一般音质的音乐文件，
-		我们一般只需要保证每用户稳定的100KB/s的下行速度；
+		我们一般只需要保证每用户稳定的100KB/s的下行速度;
 	\item 对于下载请求，我们需要使用户尽快得到需要的文件，
-		应尽可能保证每用户稳定的2.5MB/s的下行速度；
+		应尽可能保证每用户稳定的2.5MB/s的下行速度;
 	\item 在服务器峰值时，应合理分配下载音乐使用的带宽，
 		使得其他用户的播放、串流需求不受影响，
-		这种情形下，应保证每用户稳定的512KB/s的下行速度；
+		这种情形下，应保证每用户稳定的512KB/s的下行速度;
 \end{enumerate}
 
 \subsection{数据库性能需求}
@@ -945,11 +945,11 @@
 \begin{enumerate}
 	\item \textbf{要求的屏幕格式}:
 		PC客户端支持大于$800 \times 600$ 分辨率的屏幕，并对根据屏幕大小以及系统
-		设定的屏幕元素放大比例做自动适应；
+		设定的屏幕元素放大比例做自动适应;
 	\item \textbf{使用方式}:
 		对于一般的用户，我们的产品使用逻辑与一般的PC软件一致，
 			用户不需要主动学习便可学会使用它，
-		同时，我们也会在安装后附上使用说明书，来保证用户可以方便使用；
+		同时，我们也会在安装后附上使用说明书，来保证用户可以方便使用;
 \end{enumerate}
 
 
@@ -959,11 +959,11 @@
 \begin{enumerate}
 	\item \textbf{要求的屏幕格式}:
 		移动客户端支持大于$1334 \times 750$ 分辨率的移动设备屏幕，并对根据屏幕大小以及系统
-		设定的屏幕元素放大比例做自动适应；
+		设定的屏幕元素放大比例做自动适应;
 	\item \textbf{使用方式}:
 		对于一般的用户，我们的产品使用逻辑与一般的移动设备软件一致，
 			用户不需要主动学习便可学会使用它，
-		同时，我们也会在安装后附上使用说明书，来保证用户可以方便使用；
+		同时，我们也会在安装后附上使用说明书，来保证用户可以方便使用;
 \end{enumerate}
 
 \iffalse
@@ -977,8 +977,8 @@
 		以上点赞和评论的数量会被显示。
 	\item \textbf{页面规划}： 
 	\begin{itemize}
-		\item 私人空间-歌单界面设计，请参考图\ref{fig:mobile_user1}；
-		\item 私人空间-动态界面设计，请参考图\ref{fig:mobile_user2}；
+		\item 私人空间-歌单界面设计，请参考图\ref{fig:mobile_user1};
+		\item 私人空间-动态界面设计，请参考图\ref{fig:mobile_user2};
 	\end{itemize}
 \end{enumerate}
 }
@@ -1017,11 +1017,11 @@
 \begin{enumerate}
 	\item \textbf{要求的屏幕格式}:
 		网页客户端支持大于$800 \times 600$ 分辨率的通用网页浏览器，
-		并对根据屏幕大小以及浏览器设定的屏素放大比例做自动适应；
+		并对根据屏幕大小以及浏览器设定的屏素放大比例做自动适应;
 	\item \textbf{使用方式}:
 		对于一般的用户，我们的产品使用逻辑与一般的网页一致，
 			用户不需要主动学习便可学会使用它，
-		同时，我们也会在安装后附上使用说明书，来保证用户可以方便使用；
+		同时，我们也会在安装后附上使用说明书，来保证用户可以方便使用;
 \end{enumerate}
 
 \subsection{软件接口}
